@@ -1,0 +1,106 @@
+.formuEdit {
+    padding: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.formuEdit .form-group.col-md-6 {
+    float: left;
+    width: 48%;
+    margin-right: 10px;
+}
+
+.formuEdit .form-group.col-md-6:nth-child(2) {
+    float: left;
+    width: 48%;
+    margin-right: 0px;
+}
+
+.formuEdit .form-group {
+    margin-bottom: 15px;
+}
+
+.required {
+    color: red;
+}
+
+
+/* .redes {
+    display: flex;
+    /* grid-template-columns: repeat(5, 20%); */
+
+
+/* grid-auto-flow: column;
+    grid-template-columns: max-content;
+    grid-template-rows: repeat(7, 22%);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    width: 100%; */
+
+
+/*  */
+
+.redes {
+    display: flex;
+    flex-direction: column;
+}
+
+.switch {
+    display: flex;
+}
+
+.direcciones {
+    display: grid;
+    /*grid-template-columns: repeat(2, 1fr);*/
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: 110px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    box-shadow: var(--shadow);
+}
+
+.direcciones .item1 {
+    grid-area: 1 / 1 / 2 / 2;
+    background-color: var(--green-gray);
+    border-radius: 4px;
+    margin-right: 2px;
+}
+
+.direcciones .item2 {
+    grid-area: 1 / 2 / 2 / 3;
+    background-color: var(--green-gray);
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+@media (min-width: 768px) {
+    .col-md-6 {
+        float: left;
+        padding: 5px;
+    }
+    .col-md-3 {
+        height: 100vh;
+    }
+    .redes .row {
+        display: flex;
+        flex-direction: column;
+        float: left;
+    }
+    .redes label {
+        display: flex;
+    }
+    .redes label i {
+        display: flex;
+        margin-right: 11px;
+    }
+    .code img {
+        object-fit: contain;
+        width: 200px !important;
+        display: flex;
+    }
+    .redes {
+        grid-template-rows: repeat(7, 7%);
+    }
+}

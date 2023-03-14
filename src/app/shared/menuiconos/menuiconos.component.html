@@ -1,0 +1,53 @@
+<ng-template #loading>
+    <div id="contenedor_carga">
+        <div id="carga"></div>
+    </div>
+</ng-template>
+
+<div *ngIf="user.role === 'SUPERADMIN'|| user.role === 'ADMIN' ">
+    <div class="acces-icons animated fadeIn container">
+        <!-- <a class="nav-link collapsed cursor" routerLink="/dashboard">
+
+            <div class="icontext shadow">
+                <i class="bi bi-grid"></i>
+                <h3>Dashboard</h3>
+            </div>
+        </a> -->
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/users">
+
+            <div class="icontext shadow">
+                <i class="fa fa-users"></i>
+                <h3>Usuarios</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/directorio">
+
+            <div class="icontext shadow">
+                <i class="fa fa-bookmark"></i>
+                <h3>Directorio</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/payments">
+
+            <div class="icontext shadow">
+                <i class="fa fa-cc"> </i>
+                <h3>Pagos</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]">
+
+            <div class="icontext shadow">
+                <i class="fa fa-user-md"> </i>
+                <h3>Cuenta</h3>
+            </div>
+        </a>
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/configuraciones">
+
+            <div class="icontext shadow">
+                <i class="fa fa-cogs"> </i>
+                <h3>mas</h3>
+            </div>
+        </a>
+
+    </div>
+</div>

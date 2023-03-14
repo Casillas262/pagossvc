@@ -1,0 +1,68 @@
+<!-- =======| Main |======= -->
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
+
+    <div class="col-xs-12">
+        <div class="leftside">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <!-- <h1><i class="bx bxs-user-account"></i> {{title}}</h1> -->
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="fa fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/dashboard/planes/all">planes</a></li>
+                        <li class="breadcrumb-item active">{{plan.name}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="buton">
+            <button class="btn btn-outline-danger" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+        <div class="clear"></div>
+
+
+
+        <section class="section dashboard">
+
+            <div class="planespage">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <!-- banner planes -->
+
+                        <div class=" shadow animated fadeInUp ">
+                            <img [src]="plan.image | imagenPipe: 'plans'">
+                            <!-- <div class="info">
+
+
+                      </div> -->
+                        </div>
+                        <!-- banner planes -->
+
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <!-- banner planes -->
+
+                        <div class="instruccioness shadow animated fadeInUp ">
+                            <!-- <img src="./assets/img/paypal-pay01.png" class="img-responsive " alt=""> -->
+                            <div class="info">
+
+                                <h2>{{plan.name}}</h2>
+                                <br>
+                                <h2>{{plan.price|currency}}</h2>
+
+                            </div>
+                        </div>
+                        <!-- banner planes -->
+                    </div>
+                </div>
+            </div>
+
+
+
+        </section>
+    </div>
+
+
+</div>
+<!--/main-->

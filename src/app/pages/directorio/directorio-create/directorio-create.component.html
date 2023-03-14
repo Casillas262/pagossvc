@@ -1,0 +1,236 @@
+<!-- =======| Main |======= -->
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
+
+    <div class="col-xs-12">
+        <div class="leftside">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{pageTitle}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="fa fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/dashboard/directorio">Directorio</a></li>
+                        <li class="breadcrumb-item active">{{pageTitle}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="buton">
+            <button class="btn btn-outline-success pull-right" (click)="guardarDirectorio()">Guardar</button>
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+
+        <div class="clear"></div>
+
+
+        <section class="section dashboard">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <form class="form-horizontal form-material" #directoryForm="ngForm" enctype="multipart/form-data">
+                                <div class="row ">
+
+
+                                    <div class="col-xs-12 col-sm-6 col-md-8">
+                                        <div class=" col-md-6">
+                                            <label>Nombres <span class="required">*</span></label>
+                                            <input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" required>
+
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label>Apellidos <span class="required">*</span></label>
+                                            <input type="text" [(ngModel)]="surname" name="surname" class="form-control" required>
+
+                                        </div>
+
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Especialidad <span class="required">*</span></label>
+
+                                            <select name="especialidad" id="input" class="form-control" [(ngModel)]="especialidad" required="required">
+                                        <option value="">Seleccione</option>
+                                        <option value="Cirugía Buco-maxilofacial">Cirugía Buco-maxilofacial</option>
+                                        <option value="Cirugía Maxilofacial">Cirugía Maxilofacial</option>
+                                      </select>
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Universidad <span class="required">*</span></label>
+                                            <input type="text" [(ngModel)]="universidad" name="universidad" class="form-control" required>
+
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Año de Graduación </label>
+                                            <input type="text" [(ngModel)]="ano" name="ano" class="form-control">
+
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Sitio Web </label>
+                                            <input type="text" [(ngModel)]="website" name="website" class="form-control">
+                                        </div>
+
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Email<span class="required">*</span></label>
+                                            <input type="text" [(ngModel)]="email" name="email" class="form-control" required>
+
+                                        </div>
+
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Estado</label>
+                                            <input type="text" [(ngModel)]="estado" name="estado" class="form-control">
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Ciudad</label>
+                                            <input type="text" [(ngModel)]="ciudad" name="ciudad" class="form-control">
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Teléfonos</label>
+                                            <input type="text" [(ngModel)]="telefonos" name="telefonos" class="form-control">
+                                        </div>
+
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Teléfonos Principal  <span class="required">*</span></label>
+                                            <input type="text" [(ngModel)]="telprincipal" name="telprincipal" class="form-control" required>
+
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Teléfonos Adicional(Opcional)</label>
+                                            <input type="text" [(ngModel)]="tel1" name="tel1" class="form-control">
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Teléfonos Móvil  </label>
+                                            <input type="text" [(ngModel)]="telmovil" name="telmovil" class="form-control">
+
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <label for="exampleInputEmail1">Teléfonos Home(Opcional)</label>
+                                            <input type="text" [(ngModel)]="telhome" name="telhome" class="form-control">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Dirección <span class="required">*</span></label>
+                                            <div class="col-md-12">
+                                                <textarea [(ngModel)]="direccion" name="direccion" id="direccion" cols="30" rows="4" class="form-control"></textarea>
+                                                <!-- <ckeditor [editor]="Editor" id="direccion" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion" value="direccion" rows="5" class="form-control" required></ckeditor> -->
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <label>Dirección Adicional (Opcional)</label>
+                                            <textarea [(ngModel)]="direccion1" name="direccion1" cols="30" rows="4" class="form-control"></textarea>
+                                            <!-- <ckeditor [editor]="Editor1" id="direccion1" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion1" value="direccion1" rows="5" class="form-control"></ckeditor> -->
+
+                                        </div>
+                                        <div class="clear"></div>
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <br>
+                                        <!----//-->
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="col-xs-12 ">
+                                            <div class="form-group" style="margin-bottom: 25px;">
+                                                <label for="exampleInputuname">Status<span class="required">*</span></label>
+                                                <div class="input-group">
+                                                    <!-- <input type="text" formControlName="status" class="form-control" id="exampleInputuname" placeholder="status" required> -->
+                                                    <select name="status" id="input" class="form-control" [(ngModel)]="status" required="required">
+                                                  <option value="">Seleccione</option>
+                                                  <option value="PUBLISHED">Publicado</option>
+                                                  <option value="PENDING">Pendiente</option>
+                                                  <option value="REJECTED">Rechazado</option>
+                                              </select>
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="col-xs-12 ">
+                                                <div class="form-group form-row">
+                                                    <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
+                                                    <div class="col-xs-12">
+                                                        <label>Imagen Avatar</label>
+                                                        <input type="file" id="image" accept="image/*" name="image" class="form-control" (change)="onFileSelect($event)" />
+                                                        <!-- preview image -->
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="col-xs-12">
+                                            <div>
+                                                <h4>Redes Sociales</h4>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="redes">
+                                                <div class="row mb-3">
+                                                    <label for="facebook" class="col-xs-12 col-form-label">
+                                          <i class="bi bi-facebook"></i> Facebook</label>
+                                                    <div class="col-11">
+                                                        <input type="text" class="form-control" [(ngModel)]="facebook" name="facebook" placeholder="https://facebook.com/nameuser">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="instagram" class="col-xs-12 col-form-label">
+                                        <i class="bi bi-instagram"></i> Instagram</label>
+                                                    <div class="col-11">
+                                                        <input type="text" class="form-control" [(ngModel)]="instagram" name="instagram" placeholder="https://instagram.com/nameuser">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="twitter" class="col-xs-12 col-form-label">
+                                      <i class="bi bi-twitter"></i> Twitter</label>
+                                                    <div class="col-11">
+                                                        <input type="text" class="form-control" [(ngModel)]="twitter" name="twitter" placeholder="https://twitter.com/nameuser">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="linkedin" class="col-xs-12 col-form-label">
+                                    <i class="bi bi-linkedin"></i> Linkedin</label>
+                                                    <div class="col-11">
+                                                        <input type="text" class="form-control" [(ngModel)]="linkedin" name="linkedin" placeholder="https://linkedin.com/nameuser">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h4>Codigo Vcard QR</h4>
+                                            <br>
+                                            <qr-code *ngIf="display" class="code" id="box" [value]="vCardInfo" [size]="200" style=>
+                                                <img class="yellow">
+                                            </qr-code>
+                                            <div class="clear"></div>
+                                            <!-- <a class="btn btn-primary" (click)="generateQRCode()">Generar QR</a> -->
+                                            <a class="btn btn-primary" *ngIf="display" value="vCardInfo" (click)="hideQRCode()">Hide QR</a>
+                                            <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}">Download Image</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <input type="hidden" formControlName="id">
+                                <button class="btn btn-outline-success waves-effect waves-light m-r-10" (click)="guardarDirectorio()" type="submit">Guardar</button>
+
+
+                            </form>
+
+
+                        </div>
+                        <!-- {{error}} -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+<!--/main-->

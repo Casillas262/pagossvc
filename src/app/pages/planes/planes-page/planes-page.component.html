@@ -1,0 +1,50 @@
+<!-- =======| Main |======= -->
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
+
+    <div class="col-xs-12">
+        <div class="leftside">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <!-- <h1><i class="bx bxs-user-account"></i> {{title}}</h1> -->
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="fa fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item active">Planes</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="clear"></div>
+
+
+
+        <section class="section dashboard">
+
+            <div class="planespage">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-9" style="float:left">
+                        <div class="col-xs-12 col-sm-6 col-md-4 " *ngFor="let product of planes">
+                            <app-product-item [product]="product"></app-product-item>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-12 col-sm-3 ">
+                        <app-cart></app-cart>
+                        <p class="text-center">ó</p>
+                        <button class="btn btn-outline-primary btn-block col-12 mb-2" routerLink="/dashboard/realizar-pago">
+      Otros Pagos
+    </button>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </section>
+    </div>
+
+</div>
+<!--/main-->

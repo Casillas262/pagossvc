@@ -1,0 +1,17 @@
+.planespage img {
+    width: 100%;
+}
+
+.planespage .instruccioness {
+    margin-top: 0;
+    height: auto;
+}
+
+.planespage .instruccioness .info {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: auto;
+    align-items: start;
+    align-self: start;
+}

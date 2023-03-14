@@ -1,0 +1,38 @@
+.dolarvzla {
+    display: flex;
+    border: 1px solid #fff;
+    margin: 5px 0px;
+    border-radius: 12px;
+    background-color: #f2f2f2;
+    box-shadow: 0px 3px 6px #ccc;
+}
+
+.dolarvzla :nth-child(1) {
+    display: flex;
+}
+
+.dolarvzla :nth-child(2),
+.dolarvzla :nth-child(3),
+.dolarvzla :nth-child(4),
+.dolarvzla :nth-child(5),
+.dolarvzla :nth-child(6) {
+    border-left: 1px solid #fff;
+    padding: 5px;
+}
+
+.dolarvzla img {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    border-radius: 100px;
+    margin: 5px;
+    align-items: center;
+    align-self: center;
+}
+
+@media(max-width:768px) {
+    .dolarvzla {
+        display: flex;
+        flex-direction: column;
+    }
+}

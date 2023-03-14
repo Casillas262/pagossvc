@@ -1,0 +1,80 @@
+<!-- =======| Main |======= -->
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
+
+    <div class="col-xs-12">
+        <div class="leftside">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
+                        <li class="breadcrumb-item"><a routerLink="/dashboard/configuraciones">Configuraciones</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="buton">
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+        <div class="clear"></div>
+
+
+
+        <section class="section dashboard">
+
+            <div class="row">
+                <div class="col-12 col-md-6">
+
+
+                    <form enctype="multipart/form-data" #planEditForm="ngForm">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nombre</label>
+                            <input [(ngModel)]="plan.name" type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Precio</label>
+                            <input [(ngModel)]="plan.price" type="text" class="form-control" id="price" name="price">
+                        </div>
+                        <div class="form-group">
+                            <label for="select-input" style="line-height: 2.2;">Moneda <span class="required">*</span></label>
+                            <select class="form-control " [(ngModel)]="plan.currency_id" id="currency_id" name="currency_id">
+                                <option disabled  value="">SELECCIONAR</option>
+                                <option *ngFor="let item of currenciesAll" [value]="item.id" >{{item.name}}</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Imagen</label>
+                            <input (change)="onFileSelect($event)" type="file" class="form-control" id="image" name="image">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Status</label>
+                            <select name="" id="input" class="form-control" [(ngModel)]="plan.status" id="status" name="status">
+                              <option value="">Seleccione</option>
+                              <option value="APPROVED">Aprobado</option>
+                              <option value="PENDING">Pendiente</option>
+                              <option value="REJECTED">Rechazado</option>
+                          </select>
+
+                        </div>
+
+                        <button (click)="editPlan()" class="btn btn-primary">Submit</button>
+                    </form>
+
+
+                </div>
+                <div class="col-12 col-md-6">
+                    <img [src]="plan.image | imagenPipe: 'plans'" style="width:100%; padding: 10px;
+                  border: 1px solid #ccc;
+                  margin-top: 30px;" class="shadow" alt="">
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</div>
+<!--/main-->

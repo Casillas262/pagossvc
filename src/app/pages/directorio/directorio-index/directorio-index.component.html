@@ -1,0 +1,135 @@
+<!-- =======| Main |======= -->
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
+
+    <div class="col-xs-12">
+        <div class="leftside">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="fa fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="buton">
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+
+        <div class="clear"></div>
+
+
+        <section class="section dashboard">
+
+
+            <!-- Recent Pagos -->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-11 col-sm-11">
+                        <!-- buscador -->
+                        <!-- <app-search></app-search> -->
+                        <!-- buscador -->
+                    </div>
+                    <div class="col-xs-1 col-sm-1">
+                        <div class="text-right">
+                            <button class="btn btn-primary" [routerLink]="['/dashboard/directorio/create/']">
+                    <i class="fa fa-pencil"></i>
+                    Crear
+                  </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card recent-sales overflow-auto">
+
+
+                    <div class="card-body">
+
+
+                        <table [ngClass]="loading? 'table table-borderless datatable':'table table-borderless'">
+                            <thead>
+                                <tr>
+                                    <th>imagen</th>
+                                    <th>user ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th class="text-nowrap">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let directory of directories |  paginate: { itemsPerPage: count, currentPage: p }">
+                                    <!-- <td>
+                                        <a [routerLink]="['/dashboard/directorio/view-public/', directory.id]">{{directory.id}}</a>
+                                    </td> -->
+                                    <td>
+                                        <div class="image">
+                                            <div *ngIf="!directory.image ">
+                                                <img [src]="directory.image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
+                                            </div>
+                                            <div *ngIf="directory.image">
+                                                <img [src]="directory.image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a [routerLink]="['/dashboard/user/', directory.user_id]">{{directory.user_id}}</a>
+                                    </td>
+
+
+
+                                    <td>{{directory.nombre}} {{directory.surname}}</td>
+                                    <td>{{directory.email}} </td>
+
+                                    <td>
+                                        <!-- {{directory.status}} -->
+
+                                        <span class="badge bg-success" *ngIf="directory.status === 'PUBLISHED'">Publicado</span>
+                                        <span class="badge bg-primary" *ngIf="directory.status === 'PENDING'">Pendiente</span>
+                                        <span class="badge bg-danger" *ngIf="directory.status === 'REJECTED'">Rechazado</span>
+                                    </td>
+
+                                    <!-- <td><span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span></td> -->
+
+                                    <td class="text-nowrap text-center">
+
+                                        <a [routerLink]="['/dashboard/directorio/edit', directory.id]" class="cursor" data-toggle="tooltip" data-original-title="Edit">
+                                            <div class="btn btn-success"><i class="fa fa-edit"></i></div>
+                                        </a>
+                                        <a (click)="eliminarDirectory(directory.id)" class="cursor" data-toggle="tooltip" data-original-title="Borrar">
+                                            <div class="btn btn-danger"><i class="fa fa-trash"></i></div>
+                                        </a>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                        <!-- <table class="table table-borderless" *ngIf="loading">
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">&nbsp; Encontrados {{ usersCount }} usuarios</td>
+                            </tr>
+                        </tfoot>
+                    </table> -->
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- End Recent Pagos -->
+
+        </section>
+    </div>
+
+</div>
+<!--/main-->

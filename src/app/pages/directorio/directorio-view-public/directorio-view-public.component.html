@@ -1,0 +1,200 @@
+<!-- =======| Main |======= -->
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="profile">
+
+    <div class="col-xs-12">
+        <div class="leftside">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="bi bi-house"></i> Inicio</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="buton">
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+        <div class="clear"></div>
+        <section class="section profile">
+            <div class="row">
+                <div class="col-xl-3">
+
+                    <div class="card">
+                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                            <div *ngIf="!directory.image ">
+                                <img [src]="directory.image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
+                            </div>
+                            <div *ngIf="directory.image">
+                                <img [src]="directory.image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
+
+                            </div>
+
+                            <h3>{{directory.nombre}} </h3>
+                            <p>{{directory.email}}</p>
+                            <h3>
+                                <span class="badge bg-dark-light" *ngIf="userprofile.role === 'SUPERADMIN'">SuperAdmin</span>
+                                <span class="badge bg-primary" *ngIf="userprofile.role === 'ADMIN'">Admin</span>
+                                <span class="badge bg-success" *ngIf="userprofile.role === 'MEMBER'">Miembro</span>
+                                <span class="badge bg-secondary" *ngIf="userprofile.role === 'GUEST'">Invitado</span>
+                            </h3>
+
+
+                            <div *ngIf="!directory">
+                                no data social
+                            </div>
+
+                            <!-- <span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span> -->
+                            <div class="social-links mt-2">
+                                <a *ngIf="directory.twitter " [href]="directory.twitter " class="twitter"><i class="bi bi-twitter"></i></a>
+                                <a *ngIf="directory.facebook " [href]="directory.facebook" class="facebook"><i class="bi bi-facebook"></i></a>
+                                <a *ngIf="directory.instagram " [href]="directory.instagram" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a *ngIf="directory.linkedin " [href]="directory.linkedin " class="linkedin"><i class="bi bi-linkedin"></i></a>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-9">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <div class="col-xs-12">
+                                <div *ngIf="directory">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                            <div class="col-12  label"><i class="bi bi-person-circle"></i> Nombre</div>
+                                            <div class="col-12  info">{{directory.nombre}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                            <div class="col-12  label"><i class="bi bi-person-circle"></i> Apellido</div>
+                                            <div class="col-12  info">{{directory.surname}}</div>
+                                        </div>
+
+
+                                        <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                            <div class="col-12  label"><i class="bi  bi-award"></i> Especialidad</div>
+                                            <div class="col-12 info">{{directory.especialidad}} </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                            <div class="col-12  label"><i class="bi bi-bank2"></i> Universidad</div>
+                                            <div class="col-12  info">{{directory.universidad}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                            <div class="col-12  label"><i class="bi  bi-award"></i> Año</div>
+
+                                            <div class="col-12  info">{{directory.ano}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-4 b-r">
+                                            <div class="col-12  label"><i class="bi bi-geo"></i> Website</div>
+                                            <div class="col-12  info" *ngIf="directory.website">
+                                                <a href="{{directory.website}}" target="_blank">
+
+                                          {{directory.website}}
+                                        </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                            <div class="col-12  label"><i class="bi bi-telephone"></i> Principal</div>
+                                            <div class="col-12  info">
+                                                <a href="tel:{{directory.telprincipal}}" target="_blank">
+                                        {{directory.telprincipal}}
+                                        </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                            <div class="col-12  label"><i class="bi bi-telephone"></i> Móvil</div>
+
+                                            <div class="col-12  info">
+                                                <a href="tel:{{directory.telmovil}}" target="_blank">
+                                          {{directory.telmovil}}
+                                        </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                            <div class="col-12  label"><i class="bi bi-telephone"></i> Oficina</div>
+                                            <div class="col-12  info">
+                                                <a href="tel:{{directory.telhome}}" target="_blank">
+                                          {{directory.telhome}}
+                                        </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                            <div class="col-12  label"><i class="bi bi-telephone"></i> Adicional</div>
+                                            <div class="col-12  info">
+                                                <a href="tel:{{directory.tel1}}" target="_blank">
+                                          {{directory.tel1}}
+                                        </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-3 b-r">
+                                            <div class="col-12  label"><i class="bi bi-telephone"></i> Otros</div>
+                                            <div class="col-12 info">{{directory.telefonos}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-3 b-r">
+                                            <div class="col-12  label"><i class="bi bi-geo"></i> Estado</div>
+                                            <div class="col-12  info">{{directory.estado}}</div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-3 b-r">
+                                            <div class="col-12  label"><i class="bi bi-file-text"></i> Dirección</div>
+                                            <div class="col-12  info">
+                                                <p>{{directory.direccion}}</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-3 b-r">
+                                            <div class="col-12  label"><i class="bi bi-file-text"></i> Dir. Adicional</div>
+                                            <div class="col-12  info">
+                                                <p>{{directory.direccion1}}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="imgqr">
+                                <qr-code class="code" id="box" [value]="directory.vcard" [size]="250">
+                                    <img style="margin: auto;">
+                                </qr-code>
+                                <div class="clear"></div>
+                                <br>
+
+                                <a class="btn btn-outline-primary" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}"><i class="fa fa-download"></i> Descargar QR</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+<!--/main-->

@@ -1,0 +1,435 @@
+<!-- =======| Main |======= -->
+
+
+<div *ngIf="!userprofile">
+    No info
+</div>
+
+<div class="container animated fadeInUp" id="main" class="main" role="main" name="profile" *ngIf="userprofile">
+
+    <div class="col-xs-12">
+        <div class="leftside">
+            <!-- Page Title -->
+            <div class="pagetitle">
+                <h1><i class="bx bxs-user-account"></i> {{title}} </h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a routerLink="/"><i class="fa fa-home"></i> Inicio</a></li>
+                        <li class="breadcrumb-item active">{{title}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="buton">
+            <button class="btn btn-outline-danger pull-right" href="javascript:void(0)" (click)="goBack()">Volver</button>
+        </div>
+        <div class="clear"></div>
+
+        <section class="section profile">
+            <div class="row">
+                <div class="col-xl-4">
+
+                    <div class="card">
+                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                            <div *ngIf="!userprofile.directories.image">
+                                <img src="assets/images/no-image.jpg" class="rounded-circle">
+                            </div>
+                            <div *ngIf="userprofile.directories.image">
+                                <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                            </div>
+                            <!-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
+                            <h2>{{userprofile.username}}</h2>
+                            <p>{{userprofile.email}}</p>
+
+                            <span class="badge bg-dark-light" *ngIf="userprofile.role === 'SUPERADMIN'">SuperAdmin</span>
+                            <span class="badge bg-primary" *ngIf="userprofile.role === 'ADMIN'">Admin</span>
+                            <span class="badge bg-success" *ngIf="userprofile.role === 'MEMBER'">Miembro</span>
+                            <span class="badge bg-secondary" *ngIf="userprofile.role === 'GUEST'">Invitado</span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-8">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <div *ngIf="userprofile.role === 'GUEST'">
+                                <ul class="nav nav-tabs nav-tabs-bordered">
+
+                                    <li class="nav-item">
+                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
+                                    </li>
+                                    <li class="nav-item" *ngIf="userprofile.is_active === 1 ">
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Mi Directorio</button>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar
+                  Contraseña</button>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                            <div *ngIf="userprofile.role === 'SUPERADMIN' || userprofile.role === 'ADMIN'  || userprofile.role === 'MEMBER' ">
+                                <ul class="nav nav-tabs nav-tabs-bordered">
+
+                                    <li class="nav-item">
+                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Mi Directorio</button>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configuraciones</button>
+                              </li> -->
+
+                                    <li class="nav-item">
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar
+                Contraseña</button>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                            <div class="tab-content pt-2">
+
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                    <br />
+
+                                    <div class="row">
+                                        <!-- <div class="col-xs-6 col-sm-3">
+                                      <div class="col-lg-3 col-md-4 label ">
+                                          <i class="bi bi-person-circle"></i> Nombre
+                                      </div>
+                                      <div class="col-lg-9 col-md-8">{{user.nombre}}</div>
+                                  </div> -->
+                                        <div class="col-xs-6 col-sm-3">
+                                            <div class="col-lg-3 col-md-4 label ">
+                                                <i class="bi bi-person-circle"></i> Username
+                                            </div>
+                                            <div class="col-lg-9 col-md-8">{{userprofile.username}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6">
+                                            <div class="col-lg-3 col-md-4 label"><i class="bi bi-envelope"></i> Email</div>
+                                            <div class="col-lg-9 col-md-8">{{userprofile.email}}</div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6">
+                                            <div class="col-lg-3 col-md-4 label"><i class="bi bi-bank2"></i> Tipo Registro</div>
+                                            <div class="col-lg-9 col-md-8">{{userprofile.role}}</div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+                                <!-- editar perfil -->
+                                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                                    <!-- Profile Edit Form -->
+                                    <form [formGroup]="profileForm" (submit)="updateForm()">
+                                        <div class="row mb-3">
+                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label"><i class="bi  bi-file-image"></i>
+                      Imagen</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <img src="assets/img/profile-img.jpg" alt="Profile">
+                                                <div class="pt-2">
+                                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
+                            class="bi bi-upload"></i></a>
+                                                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
+                            class="bi bi-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="username" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-person-circle"></i> Username</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="username" type="text" class="form-control" id="username" formControlName="username" [value]="userprofile.username">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="Email" class="col-md-4 col-lg-3 col-form-label"><i class="bi bi-envelope"></i>
+                      Email</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="email" type="email" class="form-control" id="Email" [readOnly]="userprofile.email" [value]="userprofile.email">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="text-center">
+                                            <input type="hidden" formControlName="id">
+                                            <button type="submit" class="btn btn-primary"><i class="ri ri-save-3-fill"></i> Guardar</button>
+                                        </div>
+                                    </form>
+                                    <!-- End Profile Edit Form -->
+
+                                </div>
+
+                                <!-- mi directorio                             -->
+                                <div class="tab-pane fade pt-3" id="profile-settings">
+
+                                    <div class="containera">
+                                        <div class="row">
+                                            <div class="col-xs-6 col-sm-8">
+                                                <h5>{{pageTitle}}</h5>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4">
+                                                <a [routerLink]="['/dashboard/directorio/view-public/', userdirectory.id]">
+                                                    <button class="btn btn-outline-success">Ver mi Tarjeta</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="clear"></div>
+                                    <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm">
+                                        <div class="row flex-nowrap">
+
+                                            <div class="col-xs-12 col-sm-12 col-md-8">
+                                                <div *ngIf="errors?.email" class="alert alert-danger mt-3">
+                                                    {{ errors?.email }}
+                                                </div>
+                                                <div *ngIf="errors?.password" class="alert alert-danger mt-3">
+                                                    {{ errors?.password }}
+                                                </div>
+                                                <div *ngIf="errors?.error" class="alert alert-danger mt-3">
+                                                    {{ errors?.error }}
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label>Nombres <span class="required">*</span></label>
+                                                    <input type="text" formControlName="nombre" value="nombre" class="form-control" required>
+
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label>Apellidos <span class="required">*</span></label>
+                                                    <input type="text" formControlName="surname" value="surname" class="form-control" required>
+
+                                                </div>
+
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Especialidad <span class="required">*</span></label>
+                                                    <input type="text" formControlName="especialidad" value="especialidad" class="form-control" required>
+
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Universidad <span class="required">*</span></label>
+                                                    <input type="text" formControlName="universidad" class="form-control" required>
+
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Año de Graduación </label>
+                                                    <input type="text" formControlName="ano" class="form-control">
+
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Sitio Web </label>
+                                                    <input type="text" formControlName="website" value="website" class="form-control">
+                                                </div>
+
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Email<span class="required">*</span></label>
+                                                    <input type="text" formControlName="email" value="email" class="form-control" required>
+
+                                                </div>
+
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Estado</label>
+                                                    <input type="text" formControlName="estado" class="form-control">
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Ciudad</label>
+                                                    <input type="text" formControlName="ciudad" class="form-control">
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Teléfonos</label>
+                                                    <input type="text" formControlName="telefonos" class="form-control">
+                                                </div>
+
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Teléfonos Principal  <span class="required">*</span></label>
+                                                    <input type="text" formControlName="telprincipal" value="telprincipal" class="form-control" required>
+
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Teléfonos Adicional(Opcional)</label>
+                                                    <input type="text" formControlName="tel1" value="tel1" class="form-control">
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Teléfonos Móvil  </label>
+                                                    <input type="text" formControlName="telmovil" value="telmovil" class="form-control">
+
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label for="exampleInputEmail1">Teléfonos Home(Opcional)</label>
+                                                    <input type="text" formControlName="telhome" value="telhome" class="form-control">
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <label>Dirección <span class="required">*</span></label>
+                                                    <div class="col-md-12">
+                                                        <textarea formControlName="direccion" id="direccion" cols="30" rows="4" class="form-control"></textarea>
+                                                        <!-- <ckeditor [editor]="Editor" id="direccion" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion" value="direccion" rows="5" class="form-control" required></ckeditor> -->
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+
+                                                    <label>Dirección Adicional (Opcional)</label>
+                                                    <textarea formControlName="direccion1" id="direccion1" cols="30" rows="4" class="form-control"></textarea>
+                                                    <!-- <ckeditor [editor]="Editor1" id="direccion1" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion1" value="direccion1" rows="5" class="form-control"></ckeditor> -->
+
+                                                </div>
+                                                <div class="clear"></div>
+                                                <br>
+                                                <br>
+                                                <hr>
+                                                <br>
+                                                <br>
+                                                <!----//-->
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                                <div class="col-xs-12">
+                                                    <div class="form-group form-row">
+                                                        <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
+                                                        <div class="col-xs-12">
+                                                            <input type="file" id="image" (change)="onSelectedFile($event)" />
+                                                            <div [innerHTML]="uploadError" class="error"></div>
+                                                            <div *ngIf="imagePath">
+                                                                <br />
+                                                                <img [src]="imagePath" width="50%" value="photo" class="shadow">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="col-xs-12">
+                                                    <p><b>Codigo Vcard QR</b></p>
+
+                                                    <br>
+                                                    <qr-code *ngIf="display" class="code" id="box" [value]="vCardInfo" [size]="200" style=>
+                                                        <img class="yellow">
+                                                    </qr-code>
+                                                    <div class="clear"></div>
+                                                    <!-- <a class="btn btn-primary" (click)="generateQRCode()">Generar QR</a> -->
+                                                    <a class="btn btn-primary" *ngIf="display" value="vCardInfo" (click)="hideQRCode()">Hide QR</a>
+                                                    <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directorio.nombre}}_{{directorio.surname}}">Download Image</a>
+                                                </div>
+                                                <hr>
+                                                <div>
+                                                    <p><b>Redes Sociales</b></p>
+
+                                                </div>
+                                                <div class="clear"></div>
+                                                <div class="redes">
+                                                    <div class="row mb-3">
+                                                        <label for="facebook" class="col-md-4 col-lg-3 col-form-label">
+                                          <i class="bi bi-facebook"></i> Facebook</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input type="text" class="form-control" formControlName="facebook" value="facebook" placeholder="https://facebook.com/nameuser">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label for="instagram" class="col-md-4 col-lg-3 col-form-label">
+                                        <i class="bi bi-instagram"></i> Instagram</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input type="text" class="form-control" formControlName="instagram" value="instagram" placeholder="https://instagram.com/nameuser">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label for="twitter" class="col-md-4 col-lg-3 col-form-label">
+                                      <i class="bi bi-twitter"></i> Twitter</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input type="text" class="form-control" formControlName="twitter" value="twitter" placeholder="https://twitter.com/nameuser">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <label for="linkedin" class="col-md-4 col-lg-3 col-form-label">
+                                    <i class="bi bi-linkedin"></i> Linkedin</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input type="text" class="form-control" formControlName="linkedin" value="linkedin" placeholder="https://linkedin.com/nameuser">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" formControlName="id">
+                                        <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit" [disabled]="!directorioForm.valid">Guardar</button>
+
+
+                                    </form>
+
+                                </div>
+
+
+                                <div class="tab-pane fade pt-3 profile-change-password profile-edit" id="profile-change-password">
+                                    <!-- Change Password Form -->
+                                    <form>
+                                        <div class="row mb-3">
+                                            <h3>Cambiar contraseña</h3>
+                                            <p>La contraseña será cambiada al usuario <span> <b>{{userprofile.username}}</b></span>
+                                            </p>
+                                        </div>
+                                        <!-- <div class="row mb-3">
+                                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña actual</label>
+                                      <div class="col-md-8 col-lg-9">
+                                          <input name="password" type="password" class="form-control" id="currentPassword">
+                                      </div>
+                                  </div>
+
+                                  <div class="row mb-3">
+                                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva Contraseña</label>
+                                      <div class="col-md-8 col-lg-9">
+                                          <input name="newpassword" type="password" class="form-control" id="newPassword">
+                                      </div>
+                                  </div>
+
+                                  <div class="row mb-3">
+                                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Reingresar Contraseña</label>
+                                      <div class="col-md-8 col-lg-9">
+                                          <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                                      </div>
+                                  </div> -->
+
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                                        </div>
+                                    </form>
+                                    <!-- End Change Password Form -->
+
+                                </div>
+                            </div>
+                            <!-- End Bordered Tabs -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<!--/main-->

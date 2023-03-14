@@ -1,0 +1,362 @@
+<div class="clear"></div>
+<section class="topes" id="directorio">
+    <div class="container">
+        <h1 class="up">Miembros activos</h1>
+        <div *ngIf="user.role === 'SUPERADMIN' || user.role === 'ADMIN' ">
+
+            <ul>
+                <li><i class="fa fa-check-circle colorsucc"></i> Usuario Verificado</li>
+                <li><i class="fa fa-circle-o-notch colorsec"></i> Usuario por verificar</li>
+                <li><i class="fa fa-close colordang"></i> Usuario No verificado</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- search -->
+<!-- <div class="container">
+
+    <div class=" col-12">
+        <div class="buscador col ">
+            <form class="form-horizontal">
+                <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                    <div class="input-group">
+                        <input type="search" name="search" #input (keyup)="search(input.value)" type="text" class="form-control col-xs-12" placeholder="Buscar.." aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                        <div class="input-group-append">
+                            <button id="button-addon1" type="submit" class="btn btn-link text-primary" (click)="search(input.value)" name="submit" data-toggle="tooltip" title="mostrar todos"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+<!-- search -->
+<div *ngIf="user.role === 'SUPERADMIN' || user.role === 'ADMIN' ">
+    <!---Nuevo-->
+    <div class="container mt-5 mb-3 escritorio">
+        <div class="row elemendirec">
+            <div class="fr-view" *ngFor=" let doctores of directorios | paginate: { itemsPerPage: count, currentPage: p }">
+                <div class="card p-3 mb-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="elementostop">
+                            <div class="imagenes">
+                                <div *ngIf="!doctores.image">
+                                    <div class="icon icon1">
+                                        <img src="./assets/img/logo.png" class="img-circle">
+
+                                    </div>
+                                </div>
+                                <div *ngIf="doctores.image">
+                                    <div class="icon icon1">
+                                        <img [src]="doctores.image | imagenPipe: 'directories'" class="img-circle">
+
+                                    </div>
+
+                                </div>
+                                <div *ngIf="doctores.vcard">
+                                    <div class="icon icon2" style="cursor: pointer ;">
+                                        <a [routerLink]="['/dashboard/directorio/view-public/', doctores.id]"><i class="fa fa-qrcode" ></i></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="ms-2 c-details">
+                                <h6 class="mb-0">{{doctores.surname}}, {{doctores.nombre}} </h6>
+                                <span>{{doctores.especialidad}}</span>
+                                <span>{{doctores.ciudad}}</span>
+                                <div class="clear"></div>
+
+                                <span class="d-flex justify-content-start " *ngIf="doctores.status === 'PUBLISHED'"><i class="fa fa-check-circle colorsucc" ></i></span>
+                                <span class="d-flex justify-content-start" *ngIf="doctores.status === 'PENDING'"><i class="fa fa-circle-o-notch colorsec"></i></span>
+                                <span class="d-flex justify-content-start" *ngIf="doctores.status === 'REJECTED'"><i class="fa fa-close colordang"></i></span>
+                            </div>
+                            <!-- boton mostrar vcard -->
+                            <!-- boton mostrar vcard -->
+
+
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>
+                            <a href="mailto:{{doctores.emai}}" target="_blank">
+                                <i class="fa fa-envelope"></i> {{doctores.email}}
+                            </a>
+                        </p>
+                        <div *ngIf="doctores.website">
+                            <p>
+                                <a href="{{doctores.website}}" target="_blank">
+                                    <i class="fa fa-laptop"></i> {{doctores.website}}
+                                </a>
+                            </p>
+                        </div>
+                        <div *ngIf="doctores.telprincipal">
+                            <p>
+                                <a href="tel:{{doctores.telprincipal}}" target="_blank">
+                                    <i class="fa fa-phone"></i> {{doctores.telprincipal}}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="redess">
+                        <div *ngIf="doctores.facebook">
+                            <p>
+                                <a href="{{doctores.facebook}}" target="_blank">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <div *ngIf="doctores.instagram">
+                            <p>
+                                <a href="{{doctores.instagram}}" target="_blank">
+                                    <i class="bi bi-instagram"></i></a>
+                            </p>
+                        </div>
+                        <div *ngIf="doctores.twitter">
+                            <p>
+                                <a href="{{doctores.twitter}}" target="_blank">
+                                    <i class="bi bi-twitter"></i></a>
+                            </p>
+                        </div>
+                        <div *ngIf="doctores.linkedin">
+                            <p>
+                                <a href="{{doctores.linkedin}}" target="_blank">
+                                    <i class="bi bi-linkedin"></i></a>doctores.id
+                            </p>
+                        </div>
+                    </div>
+                    <a style="display: block;" [routerLink]="['/dashboard/directorio/view-public/', ]" class="btn btn-outline-success text-center">
+            + info
+            </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!---Nuevo-->
+
+    <!---movil-->
+    <div class="container movil">
+
+
+        <div class="row">
+            <div class=" col-12">
+                <div class="row">
+                    <div class="clear"></div>
+
+                    <!--Including the pagination control.-->
+                    <div class="col-xs-12 col-sm-12 mt-4 mb-4">
+                        <div class="text-center">
+                            <pagination-controls (pageChange)="p = $event" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 fr-view card-m" *ngFor=" let doctores of directorios | paginate: { itemsPerPage: count, currentPage: p }; let i=index">
+                        <div class=" card ">
+                            <div class="carbodymovil">
+                                <div class="col-xs-12 fichamovil">
+                                    <div class="elementos">
+                                        <div class="image">
+                                            <div *ngIf="!doctores.image">
+                                                <img src="./assets/img/logo.png" class="img-circle">
+                                            </div>
+                                            <div *ngIf="doctores.image">
+                                                <img [src]="doctores.image | imagenPipe: 'directories'" class="img-circle">
+
+                                            </div>
+                                        </div>
+                                        <div class="infoFichamovil">
+                                            <h5 class="card-title"><b>
+                                              <span class="d-flex justify-content-start " *ngIf="doctores.status === 'PUBLISHED'"><i class="fa fa-check-circle colorsucc" ></i></span>
+                                            <span class="d-flex justify-content-start" *ngIf="doctores.status === 'PENDING'"><i class="fa fa-circle-o-notch colorsec"></i></span>
+                                            <span class="d-flex justify-content-start" *ngIf="doctores.status === 'REJECTED'"><i class="fa fa-close colordang"></i></span>
+                                            {{doctores.surname}}, {{doctores.nombre}} </b></h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{doctores.especialidad}}</h6>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{doctores.ciudad}}</h6>
+                                        </div>
+                                        <p>
+                                            <a class="btn btn-link btn-outline-primary" [routerLink]="['/dashboard/directorio/view-public/', doctores.id]"> <i class="fa fa-eye"></i></a>
+
+                                        </p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <!--Including the pagination control.-->
+    <div class="col-xs-12 mt-4 mb-4">
+        <div class="text-center">
+            <pagination-controls (pageChange)="p = $event" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+        </div>
+    </div>
+</div>
+<div *ngIf="user.role === 'MEMBER' || user.role === 'GUEST' ">
+    <!---Nuevo-->
+    <div class="container mt-5 mb-3 escritorio">
+        <div class="row elemendirec">
+            <div class="fr-view" *ngFor=" let doctores of directories | paginate: { itemsPerPage: count, currentPage: p }">
+                <div class="card p-3 mb-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="elementostop">
+                            <div class="imagenes">
+                                <div *ngIf="!doctores.image">
+                                    <div class="icon icon1">
+                                        <img src="./assets/img/logo.png" class="img-circle">
+
+                                    </div>
+                                </div>
+                                <div *ngIf="doctores.image">
+                                    <div class="icon icon1">
+                                        <img [src]="doctores.image | imagenPipe: 'directories'" class="img-circle">
+
+                                    </div>
+
+                                </div>
+                                <div *ngIf="doctores.vcard">
+                                    <div class="icon icon2" style="cursor: pointer ;">
+                                        <a [routerLink]="['/dashboard/directorio/view-public/', doctores.user_id]"><i class="fa fa-qrcode" ></i></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="ms-2 c-details">
+                                <h6 class="mb-0">{{doctores.surname}}, {{doctores.nombre}} </h6>
+                                <span>{{doctores.especialidad}}</span>
+                                <span>{{doctores.ciudad}}</span>
+                                <div class="clear"></div>
+
+                                <span class="d-flex justify-content-start " *ngIf="doctores.status === 'PUBLISHED'"><i class="fa fa-check-circle colorsucc" ></i></span>
+                                <span class="d-flex justify-content-start" *ngIf="doctores.status === 'PENDING'"><i class="fa fa-circle-o-notch colorsec"></i></span>
+                                <span class="d-flex justify-content-start" *ngIf="doctores.status === 'REJECTED'"><i class="fa fa-close colordang"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p>
+                            <a href="mailto:{{doctores.emai}}" target="_blank">
+                                <i class="fa fa-envelope"></i> {{doctores.email}}
+                            </a>
+                        </p>
+                        <div *ngIf="doctores.website">
+                            <p>
+                                <a href="{{doctores.website}}" target="_blank">
+                                    <i class="fa fa-laptop"></i> {{doctores.website}}
+                                </a>
+                            </p>
+                        </div>
+                        <div *ngIf="doctores.telprincipal">
+                            <p>
+                                <a href="tel:{{doctores.telprincipal}}" target="_blank">
+                                    <i class="fa fa-phone"></i> {{doctores.telprincipal}}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="redess">
+                        <div *ngIf="doctores.facebook">
+                            <p>
+                                <a href="{{doctores.facebook}}" target="_blank">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <div *ngIf="doctores.instagram">
+                            <p>
+                                <a href="{{doctores.instagram}}" target="_blank">
+                                    <i class="bi bi-instagram"></i></a>
+                            </p>
+                        </div>
+                        <div *ngIf="doctores.twitter">
+                            <p>
+                                <a href="{{doctores.twitter}}" target="_blank">
+                                    <i class="bi bi-twitter"></i></a>
+                            </p>
+                        </div>
+                        <div *ngIf="doctores.linkedin">
+                            <p>
+                                <a href="{{doctores.linkedin}}" target="_blank">
+                                    <i class="bi bi-linkedin"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                    <a style="display: block;" [routerLink]="['/dashboard/directorio/view-public/', doctores.user_id]" class="btn btn-outline-success text-center">
+            + info
+            </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!---Nuevo-->
+
+    <!---movil-->
+    <div class="container movil">
+        <div class="row">
+            <div class=" col-12">
+                <div class="row">
+                    <div class="clear"></div>
+
+                    <!--Including the pagination control.-->
+                    <div class="col-xs-12 col-sm-12 mt-4 mb-4">
+                        <div class="text-center">
+                            <pagination-controls (pageChange)="p = $event" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 fr-view card-m" *ngFor=" let doctores of directories | paginate: { itemsPerPage: count, currentPage: p }; let i=index">
+                        <div class=" card ">
+                            <div class="carbodymovil">
+                                <div class="col-xs-12 fichamovil">
+                                    <div class="elementos">
+                                        <div class="image">
+                                            <div *ngIf="!doctores.image">
+                                                <img src="./assets/img/logo.png" class="img-circle">
+                                            </div>
+                                            <div *ngIf="doctores.image">
+                                                <img [src]="doctores.image | imagenPipe: 'directories'" class="img-circle">
+
+                                            </div>
+                                        </div>
+                                        <div class="infoFichamovil">
+                                            <h5 class="card-title"><b>
+                                              <span class="d-flex justify-content-start " *ngIf="doctores.status === 'PUBLISHED'"><i class="fa fa-check-circle colorsucc" ></i></span>
+                                            <span class="d-flex justify-content-start" *ngIf="doctores.status === 'PENDING'"><i class="fa fa-circle-o-notch colorsec"></i></span>
+                                            <span class="d-flex justify-content-start" *ngIf="doctores.status === 'REJECTED'"><i class="fa fa-close colordang"></i></span>
+                                            {{doctores.surname}}, {{doctores.nombre}} </b></h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{doctores.especialidad}}</h6>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{doctores.ciudad}}</h6>
+                                        </div>
+                                        <p>
+                                            <a class="btn btn-link btn-outline-primary" [routerLink]="['/dashboard/directorio/view-public/', doctores.id]"> <i class="fa fa-eye"></i></a>
+                                        </p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <!--Including the pagination control.-->
+    <div class="col-xs-12 mt-4 mb-4">
+        <div class="text-center">
+            <pagination-controls (pageChange)="p = $event" responsive="true" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+        </div>
+    </div>
+</div>
