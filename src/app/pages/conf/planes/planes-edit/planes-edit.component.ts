@@ -93,7 +93,7 @@ export class PlanesEditComponent implements OnInit {
 
   getplan(id){
     if (id !== null && id !== undefined) {
-      this.title = 'Editando Moneda';
+      this.title = 'Editando plan';
       this.planService.getPlan(+id).subscribe(
         res => {
           this.planForm.patchValue({
@@ -108,7 +108,7 @@ export class PlanesEditComponent implements OnInit {
         }
       );
     } else {
-      this.title = 'Creando Moneda';
+      this.title = 'Creando plan';
     }
   }
 
