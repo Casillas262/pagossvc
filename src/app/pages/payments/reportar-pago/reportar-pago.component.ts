@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 
 import { CartItemModel } from 'src/app/models/cart-item-model';
@@ -17,6 +16,9 @@ import { UserService } from 'src/app/services/user.service';
 import { MessageService } from 'src/app/services/message.service';
 import { PlanesService } from 'src/app/services/planes.service';
 
+import { environment } from 'src/environments/environment';
+import { AccountService } from 'src/app/services/account.service';
+
 interface HtmlInputEvent extends Event{
   target : HTMLInputElement & EventTarget;
 }
@@ -31,10 +33,7 @@ declare var $:any;
 })
 export class ReportarPagoComponent implements OnInit {
 
-  addPaymentRegisterForm: Payment = new Payment();
-  @ViewChild("paymentRegisterForm")
-  PaymentRegisterForm!: NgForm;
-  isSubmitted: boolean = false;
+  public PaymentRegisterForm: FormGroup;
 
   title= 'Realizar un Pago';
 
@@ -44,9 +43,6 @@ export class ReportarPagoComponent implements OnInit {
   Item: any[] = [];
   total= 0;
 
-  // public product: ProductPaypal;
-
-  // public PaymentRegisterForm: FormGroup;
   public usuario;
   visible :boolean = false;
 
@@ -57,37 +53,54 @@ export class ReportarPagoComponent implements OnInit {
   currenciesAll: Currencies;
   plan: Plan;
 
-  image:string;
   uploadError: boolean;
   imagePath: string;
 
-  // public imagenSubir: File;
-  // public imgTemp: any = null;
-  // public file:File;
-  // public imgSelect : String | ArrayBuffer;
+
 
   paymentSeleccionado:Payment;
 
   user:User;
   planes: Plan;
 
-  // ngform
-  public metodoInputValue: string;
-  public banknameInputValue: string;
-  public montoInputValue: string;
-  public currencyIdInputValue: string;
-  public referenciaInputValue: string;
-  public planIdInputValue: string;
-  public nombreInputValue: string;
-  public emailInputValue: string;
-  public fileInputValue: File;
+  public storage = environment.apiUrlMedia
 
+  public afuConfig = {
+    multiple: false,
+    formatsAllowed: '.jpg, .png, .gif, .jpeg',
+    method: 'POST',
+    maxSize: '2',
+    uploadAPI: {
+      url: environment.apiUrl + '/payment/upload',
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + this.accountService.headers
+
+      },
+      responseType: 'json',
+    },
+    theme: 'dragNDrop',
+    selectFileBtn: 'Select Files',
+    hideProgressBar: false,
+    hideResetBtn: false,
+    hideSelectBtn: false,
+    fileNameIndex: true,
+    replaceTexts: {
+      selectFileBtn: 'Seleccionar imagen',
+      resetBtn: 'Resetear',
+      uploadBtn: 'Subir',
+      dragNDropBox: 'Arrastre y suelte aquí',
+      attachPinBtn: 'Seleccionar una imagen',
+      afterUploadMsg_success: 'Se cargó correctamente el archivo !',
+      afterUploadMsg_error: 'Se produjo un error al subir el archivo!',
+      sizeLimit: 'Límite de tamaño 2 Megas'
+    }
+  };
 
 
   constructor(
-    // private fb: FormBuilder,
+    private fb: FormBuilder,
     private location: Location,
-    private messageService: MessageService,
     private paymentService: PaymentService,
     private usuarioService: UserService,
     private router: Router,
@@ -95,6 +108,7 @@ export class ReportarPagoComponent implements OnInit {
     private currenciesService: CurrenciesService,
     private storageService: StorageService,
     private planesService: PlanesService,
+    private accountService: AccountService,
   ) {
     this.user = this.usuarioService.user;
   }
@@ -102,21 +116,17 @@ export class ReportarPagoComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0,0);
-    // this.activatedRoute.params.subscribe( ({id}) => this.cargarForm(id));
-    // this.validarFormulario();
     this.visible= false;
     this.getCurrencies();
     this.getPlanes();
     this.getUser();
     this.closeCart();
-
+    this.validarFormulario();
     if(this.storageService.existCart()){
       this.cartItems = this.storageService.getCart();
     }
     this.total = this.getTotal();
 
-
-    // this.imagePath = environment.apiUrlMedia;
   }
 
   getUser(): void {
@@ -158,132 +168,67 @@ export class ReportarPagoComponent implements OnInit {
     this.location.back(); // <-- go back to previous location on cancel
   }
 
-  // validarFormulario(){
-  //   this.PaymentRegisterForm = this.fb.group({
-  //     metodo: ['',Validators.required],
-  //     bank_name: [''],
-  //     monto: ['',Validators.required],
-  //     currency_id: [''],
-  //     referencia: [''],
-  //     email: [''],
-  //     nombre: [''],
-  //     plan_id: [''],
-  //     status: ['PENDING'],
-  //     validacion: ['PENDING'],
-  //     user_id: [''],
-  //     image: [this.imagenSubir],
-  //   })
-  // }
-
-  // cargarForm(id: string){
-
-  //   if (id) {
-  //     this.paymentService.getPagoById(id).subscribe(
-  //       res => {
-  //         this.PaymentRegisterForm.patchValue({
-  //           metodo: res.metodo,
-  //           bank_name: res.bank_name,
-  //           monto: res.monto,
-  //           currency_id: this.currenciesAll.id,
-  //           referencia: res.referencia,
-  //           email: res.email,
-  //           nombre: res.nombre,
-  //           status: res.status,
-  //           validacion: res.validacion,
-  //           user_id: this.user.id,
-  //           plan_id: this.planes.id,
-  //           // image: this.imagenSubir
-  //         });
-  //         // this.imagePath  = res.image;
-
-  //         this.pagoSeleccionado = res;
-  //         console.log(this.pagoSeleccionado);
-  //       }
-  //     );
-  //   } else {
-  //     return;
-  //   }
-
-  // }
-
-  // onSelectedFile(event) {
-
-  //   console.log(event);
-  //       this.file = event.target.files[0];
-
-  //       const reader = new FileReader();
-  //       reader.onloadend = () =>{
-  //         this.imgTemp = reader.result;
-  //       }
-
-  //       reader.readAsDataURL(this.file);
-  // }
-
-  public onSelectedFile(event) {
-    this.fileInputValue = event.target.files[0];
-    console.log(this.fileInputValue);
+  validarFormulario(){
+    this.PaymentRegisterForm = this.fb.group({
+      id: [''],
+      metodo: ['',Validators.required],
+      bank_name: [''],
+      monto: ['',Validators.required],
+      currency_id: [''],
+      referencia: [''],
+      email: [''],
+      nombre: [''],
+      plan_id: [''],
+      status: ['PENDING'],
+      validacion: ['PENDING'],
+      user_id: [''],
+      image: [''],
+    })
   }
 
-  updateForm(): void {debugger
-    this.isSubmitted = true;
+
+
+  get image() {
+    return this.PaymentRegisterForm.get('image');
+  }
+
+  avatarUpload(datos) {
+    const data = JSON.parse(datos.response);
+    this.PaymentRegisterForm.controls['image'].setValue(data.image);//almaceno el nombre de la imagen
+  }
+
+
+  updateForm(){
+
     const formData = new FormData();
-    formData.append('metodo', this.metodoInputValue);
-    formData.append('bank_name', this.banknameInputValue);
-    formData.append('monto', this.montoInputValue);
-    formData.append('plan_id', this.planIdInputValue);
-    formData.append('currency_id', this.currencyIdInputValue);
-    formData.append('referencia', this.referenciaInputValue);
-    formData.append('nombre', this.nombreInputValue);
-    formData.append('email', this.emailInputValue);
-    formData.append('user_id', this.usuario.id);
-    formData.append('validacion', 'PENDING');
+    formData.append('metodo', this.PaymentRegisterForm.get('metodo').value);
+    formData.append('bank_name', this.PaymentRegisterForm.get('bank_name').value);
+    formData.append('monto', this.PaymentRegisterForm.get('monto').value);
+    formData.append('currency_id', this.PaymentRegisterForm.get('currency_id').value);
+    formData.append('referencia', this.PaymentRegisterForm.get('referencia').value);
+    formData.append('nombre', this.PaymentRegisterForm.get('nombre').value);
+    formData.append('email', this.PaymentRegisterForm.get('email').value);
+    formData.append('plan_id', this.PaymentRegisterForm.get('plan_id').value);
     formData.append('status', 'PENDING');
-    formData.append('image', this.fileInputValue);
+    formData.append('validacion', 'PENDING');
+    formData.append('image', this.PaymentRegisterForm.get('image').value);
 
-    this.paymentService.create(formData)
-      .subscribe( (resp: any) =>{
-        Swal.fire('Creado', `creado correctamente`, 'success');
-        this.router.navigateByUrl(`/dashboard/historial-pagos`);
-        this.emptyCart();
-      });
+
+    //crear
+    const data = {
+      ...this.PaymentRegisterForm.value,
+      user_id: this.usuario.id
+    }
+    this.paymentService.create(data)
+    .subscribe( (resp: any) =>{
+      this.router.navigateByUrl(`/dashboard/historial-pagos`);
+      this.pagoSeleccionado = resp;
+      console.log(this.pagoSeleccionado);
+      this.emptyCart();
+    })
+
   }
 
-
-
-
-  // updateForm(){
-
-  //   const formData = new FormData();
-  //   formData.append('metodo', this.PaymentRegisterForm.get('metodo').value);
-  //   formData.append('bank_name', this.PaymentRegisterForm.get('bank_name').value);
-  //   formData.append('monto', this.PaymentRegisterForm.get('monto').value);
-  //   formData.append('currency_id', this.PaymentRegisterForm.get('currency_id').value);
-  //   formData.append('referencia', this.PaymentRegisterForm.get('referencia').value);
-  //   formData.append('nombre', this.PaymentRegisterForm.get('nombre').value);
-  //   formData.append('email', this.PaymentRegisterForm.get('email').value);
-  //   formData.append('image', this.PaymentRegisterForm.get('image').value);
-
-
-  //   //crear
-  //   const data = {
-  //     ...this.PaymentRegisterForm.value,
-  //     user_id: this.usuario.id
-  //   }
-  //   this.paymentService.create(data)
-  //   .subscribe( (resp: any) =>{
-  //     // Swal.fire('Creado', `creado correctamente`, 'success');
-  //     this.router.navigateByUrl(`/dashboard/historial-pagos`);
-  //     this.pagoSeleccionado = resp;
-  //     console.log(this.pagoSeleccionado);
-  //     // this.enviarNotificacion();
-  //     this.emptyCart();
-  //   })
-
-  // }
-
-  // enviarNotificacion(): void {
-  //   this.alertService.success("Mensaje de Pago","Nuevo Pago, Favor verificar!");
-  // }
 
   closeCart(){
     var cartNotification = document.getElementsByClassName("cart-modal");

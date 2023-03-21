@@ -54,6 +54,12 @@ export class DirectorioService {
   }
 
 
+
+  deleteFoto(id) {
+    return this.http.delete(baseUrl + '/directory/delete-foto/' + id);
+  }
+
+
   getDirectorios() {
     const url = `${baseUrl}/directories`;
     return this.http.get<any>(url, this.headers)

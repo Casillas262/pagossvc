@@ -4,7 +4,6 @@ import { ReciboFacturaComponent } from '../components/recibo-factura/recibo-fact
 import { ConfiguracionesComponent } from './conf/configuraciones/configuraciones.component';
 import { CurrenciesEditComponent } from './conf/currencies/currencies-edit/currencies-edit.component';
 import { CurrenciesIndexComponent } from './conf/currencies/currencies-index/currencies-index.component';
-import { PlanesCreateComponent } from './conf/planes/planes-create/planes-create.component';
 import { PlanesEditComponent } from './conf/planes/planes-edit/planes-edit.component';
 import { PlanesIndexComponent } from './conf/planes/planes-index/planes-index.component';
 import { RolesViewComponent } from './conf/roles/roles-view/roles-view.component';
@@ -27,7 +26,6 @@ import { UserHistorialpagosComponent } from './user-historialpagos/user-historia
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
-import { DirectorioCreateComponent } from './directorio/directorio-create/directorio-create.component';
 
 
 
@@ -44,7 +42,7 @@ const childRoutes: Routes = [
 
     { path: 'planes', component: PlanesIndexComponent, data:{title:'Planes'} },
     { path: 'plan/:id', component: PlanComponent, data:{title:'Plan'} },
-    { path: 'planes/create', component: PlanesCreateComponent, data:{title:'Crear Plan'} },
+    { path: 'planes/create', component: PlanesEditComponent, data:{title:'Crear Plan'} },
     { path: 'plan/edit/:id', component: PlanesEditComponent, data:{title:'Editar Plan'} },
     { path: 'planes/all', component: PlanesPageComponent, data:{title:'Planes'} },
     { path: 'planes/plan', component: PlanComponent, data:{title:'Planes'} },
@@ -68,7 +66,7 @@ const childRoutes: Routes = [
     { path: 'profile/:id',  component: ProfileComponent, data:{title:'Perfil'} },
     //directorio
     { path: 'directorio',  component: DirectorioIndexComponent, data:{title:'Directorio'} },
-    { path: 'directorio/create', component: DirectorioCreateComponent, data:{title:'Directorio Crear'} },
+    { path: 'directorio/create', component: DirectorioEditComponent, data:{title:'Directorio Crear'} },
     { path: 'directorio/edit/:id', component: DirectorioEditComponent, data:{title:'Directorio Editar'} },
     { path: 'directorio/member/edit/:user_id', component: DirectorioEditComponent, data:{title:'Directorio Editar'} },
     { path: 'directorio/view/:id', component: DirectorioViewComponent, data:{title:'Directorio Editar'} },

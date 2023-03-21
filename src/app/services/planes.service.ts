@@ -76,41 +76,28 @@ export class PlanesService {
   }
 
   // updatePlan(plan, id:number): Observable<any> {
-  //   const url = `${baseUrl}/plan/update/${plan} + ${plan.id}`;
-  //    return this.http.put(url, plan, id, this.headers);
-
+  //   const url = `${baseUrl}/plan/update/${plan.id}`;
+  //   return this.http.put(url, plan, this.headers);
   //  }
 
    updatePlan(plan, id: number) {
-    return this.http.post<any>(baseUrl + '/plan/update/' + id, plan, this.headers)
+    return this.http.put<any>(baseUrl + '/plan/update/' + id, plan, this.headers)
 
+  }
+
+  deleteFotoPerfil(id) {
+    return this.http.delete(baseUrl + '/plan/delete-foto/' + id);
   }
 
 
 
-   update(plan): Observable<any>{
 
-    const json = JSON.stringify(plan);
-    const params = 'json=' + json;
-
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded').set('Authorization', this.token);
-
-    return this.http.put(baseUrl + '/plan/update/' + this.plan.id, params, {headers});
-  }
 
   deletePlan(plan: Plan) {
     const url = `${baseUrl}/plan/destroy/${plan}`;
     return this.http.delete(url, this.headers);
   }
 
-  uploadData(data){
-    // const url = `${baseUrl}/file/${data}`;
-    // return this.http.post(url,data, this.headers )
-    const headers =new HttpHeaders();
-    return this.http.post(environment.apiUrl+'/file', data,{
-      headers: headers
-    });
-  }
 
 
 }

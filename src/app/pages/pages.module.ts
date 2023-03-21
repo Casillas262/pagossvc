@@ -25,14 +25,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from "ngx-spinner";
-//Qr
-import { QRCodeModule } from 'angular2-qrcode';
+
 import { ContactComponent } from './contact/contact.component';
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
-import { DirectorioEditComponent } from './directorio/directorio-edit/directorio-edit.component';
-import { DirectorioIndexComponent } from './directorio/directorio-index/directorio-index.component';
-import { DirectorioViewPublicComponent } from './directorio/directorio-view-public/directorio-view-public.component';
-import { DirectorioViewComponent } from './directorio/directorio-view/directorio-view.component';
 import { HelpComponent } from './help/help.component';
 import { PaymentDetailsComponent } from './payments/payment-details/payment-details.component';
 import { PaymentEditComponent } from './payments/payment-edit/payment-edit.component';
@@ -45,7 +40,11 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserHistorialpagosComponent } from './user-historialpagos/user-historialpagos.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UsersComponent } from './users/users.component';
-import { DirectorioCreateComponent } from './directorio/directorio-create/directorio-create.component';
+
+// angular file uploader
+import { AngularFileUploaderModule } from 'angular-file-uploader';
+import { DirectoryModule } from './directorio/directory.module';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -60,17 +59,12 @@ import { DirectorioCreateComponent } from './directorio/directorio-create/direct
     DashboardUserComponent,
     UserProfileComponent,
     PagesComponent,
-    DirectorioIndexComponent,
-    DirectorioEditComponent,
-    DirectorioViewComponent,
-    DirectorioCreateComponent,
     PlanesPageComponent,
     PlanComponent,
     PaymentDetailsComponent,
     PaymentsComponent,
     PaymentEditComponent,
     ReportarPagoComponent,
-    DirectorioViewPublicComponent
   ],
   exports: [
     DashboardComponent,
@@ -84,17 +78,13 @@ import { DirectorioCreateComponent } from './directorio/directorio-create/direct
     DashboardUserComponent,
     UserProfileComponent,
     PagesComponent,
-    DirectorioIndexComponent,
-    DirectorioEditComponent,
-    DirectorioCreateComponent,
-    DirectorioViewComponent,
     PlanesPageComponent,
     PlanComponent,
     PaymentDetailsComponent,
     PaymentsComponent,
     PaymentEditComponent,
     ReportarPagoComponent,
-    DirectorioViewPublicComponent
+
   ],
   imports: [
     CommonModule,
@@ -110,7 +100,8 @@ import { DirectorioCreateComponent } from './directorio/directorio-create/direct
     NgbModule,
     NgxSpinnerModule,
     NgxPaginationModule,
-    QRCodeModule
+    AngularFileUploaderModule,
+    DirectoryModule
 
   ],
   providers: [

@@ -72,6 +72,11 @@ export class PaymentService {
   }
 
 
+  deleteFoto(id) {
+    return this.http.delete(baseUrl + '/payment/delete-foto/' + id);
+  }
+
+
   delete(id): Observable<any> {
     const url = `${baseUrl}/payment/${id}`;
     return this.http.delete(url, this.headers);

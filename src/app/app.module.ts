@@ -22,7 +22,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from "ngx-spinner";
-
+// angular file uploader
+import { AngularFileUploaderModule } from 'angular-file-uploader';
+import { DirectoryModule } from './pages/directorio/directory.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -38,7 +40,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NgxPaginationModule,
     NgxPayPalModule,
     NgbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularFileUploaderModule,
+    DirectoryModule
 
   ],
   providers: [

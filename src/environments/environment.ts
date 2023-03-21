@@ -12,9 +12,12 @@ export const environment = {
   // apiUrlMedia: "https://svcbmf.org/pagos-full/public/storage/",
   // apiUrl: "https://svcbmf.org/backen-api-pagos-angel-vps/public/api",
   // apiUrlMedia: "https://svcbmf.org/backen-api-pagos-angel-vps/public/img/",
-  apiUrl: "https://svcbmf.org/backen-api-pagos-angel-vps-nuevo/public/api",
-  apiUrlMedia: "https://svcbmf.org/backen-api-pagos-angel-vps-nuevo/public/img/",
-  // apiUrlMedia: "https://svcbmf.org/backen-api-pagos-angel-vps/public/img/",
+  //local
+  apiUrl: "http://localhost:8888/proyectos/backen-api-pagos-angel-vps/public/api",
+  apiUrlMedia: "http://localhost:8888/proyectos/backen-api-pagos-angel-vps/storage/app/",
+  //remoto
+  // apiUrl: "https://svcbmf.org/backen-api-pagos-angel-vps-nuevo/public/api",
+  // apiUrlMedia: "https://svcbmf.org/backen-api-pagos-angel-vps-nuevo/public/img/",
   clientId: 'AXlazeNsZ0CmjfJIronSzcqzw4hLHkcoVEM5fO5BY7AbD-_GhKoKezRcavq6-T4kQuRqaTXFB_VXmheG'
 
 };

@@ -246,7 +246,7 @@
                     <!-- Form -->
                     <section class="section dashboard">
 
-                        <form class="form-horizontal form-material formPagar" (submit)="updateForm()" enctype="multipart/form-data" #paymentRegisterForm="ngForm">
+                        <form class="form-horizontal form-material formPagar" (submit)="updateForm()" enctype="multipart/form-data" [formGroup]="PaymentRegisterForm">
                             <div class="container">
 
                                 <div class="col-xs-12 col-md-8 " style="float: left;">
@@ -255,19 +255,19 @@
                                             <div class="form-group ">
                                                 <label for="">Tipo De transferencia</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" [(ngModel)]="metodoInputValue" id="metodo" name="metodo" (click)="verpaypal()" type="radio" value="Paypal" id="radiotipo1">
+                                                    <input class="form-check-input" formControlName="metodo" (click)="verpaypal()" type="radio" value="Paypal" id="radiotipo1">
                                                     <label class="form-check-label" for="radiotipo1">Paypal</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" [(ngModel)]="metodoInputValue" id="metodo" name="metodo" (click)="hidepaypal()" type="radio" value="Zelle" id="radiotipo2">
+                                                    <input class="form-check-input" formControlName="metodo" (click)="hidepaypal()" type="radio" value="Zelle" id="radiotipo2">
                                                     <label class="form-check-label" for="radiotipo2">Zelle</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" [(ngModel)]="metodoInputValue" id="metodo" name="metodo" (click)="hidepaypal()" type="radio" value="Transferencia" id="radiotipo3">
+                                                    <input class="form-check-input" formControlName="metodo" (click)="hidepaypal()" type="radio" value="Transferencia" id="radiotipo3">
                                                     <label class="form-check-label" for="radiotipo3">Transferencia</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" [(ngModel)]="metodoInputValue" id="metodo" name="metodo" (click)="hidepaypal()" type="radio" value="Pago Movil" id="radiotipo4">
+                                                    <input class="form-check-input" formControlName="metodo" (click)="hidepaypal()" type="radio" value="Pago Movil" id="radiotipo4">
                                                     <label class="form-check-label" for="radiotipo4">Pago Movil</label>
                                                 </div>
                                             </div>
@@ -275,31 +275,31 @@
                                         <div class="div2">
                                             <div class="form-group ">
                                                 <label for="">Nombre Banco </label>
-                                                <input type="text" [(ngModel)]="banknameInputValue" id="bank_name" name="bank_name" class="form-control">
+                                                <input type="text" formControlName="bank_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="div3">
                                             <div class="form-group ">
                                                 <label for="">Num. referencia </label>
-                                                <input type="text" [(ngModel)]="referenciaInputValue" id="referencia" name="referencia" class="form-control">
+                                                <input type="text" formControlName="referencia" class="form-control">
                                             </div>
                                         </div>
                                         <div class="div4">
                                             <div class="form-group " *ngIf="!total">
                                                 <label for="">Monto</label>
-                                                <input type="text" [(ngModel)]="montoInputValue" id="monto" name="monto" class="form-control">
+                                                <input type="text" formControlName="monto" class="form-control">
                                             </div>
                                             <div class="form-group " *ngIf="total">
                                                 <label for="">Monto</label>
                                                 <p>{{currenciesAll[0].name}} {{total}}</p>
-                                                <input type="text" [(ngModel)]="montoInputValue" id="monto" name="monto" class="form-control" placeholder="Ingrese el monto mostrado arriba">
+                                                <input type="text" formControlName="monto" class="form-control" placeholder="Ingrese el monto mostrado arriba">
                                             </div>
                                         </div>
                                         <div class="div5">
                                             <div class="form-group ">
                                                 <label for="">Plan</label>
 
-                                                <select class="form-control " id="plan_id" name="plan_id" [(ngModel)]="planIdInputValue" required>
+                                                <select class="form-control " formControlName="plan_id" required>
                                           <option disabled  value="">SELECCIONAR</option>
                                           <option *ngFor="let item of planes" [value]="item.id">{{item.name}} | {{item.price}} </option>
 
@@ -310,7 +310,7 @@
                                             <div class="form-group ">
                                                 <label for="">Moneda</label>
 
-                                                <select class="form-control " id="currency_id" name="currency_id" [(ngModel)]="currencyIdInputValue" required>
+                                                <select class="form-control " formControlName="currency_id" required>
                                             <option disabled  value="">SELECCIONAR</option>
                                             <option *ngFor="let item of currenciesAll" [value]="item.id">{{item.name}}</option>
 
@@ -320,13 +320,13 @@
                                         <div class="div7">
                                             <div class="form-group ">
                                                 <label for="">Nombre y Apellido(en cuenta pagadora) </label>
-                                                <input type="text" id="nombre" name="nombre" [(ngModel)]="nombreInputValue" class="form-control">
+                                                <input type="text" formControlName="nombre" class="form-control">
                                             </div>
                                         </div>
                                         <div class="div8">
                                             <div class="form-group ">
                                                 <label for="">Email (en cuenta pagadora)</label>
-                                                <input type="text" id="email" name="email" [(ngModel)]="emailInputValue" class="form-control">
+                                                <input type="text" formControlName="email" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -338,7 +338,8 @@
 
                                         <p>Imagen del pago (requerido) <br> (peso max: 500kb )</p>
                                         <div class="col-xs-12">
-                                            <input type="file" id="image" name="image" class="form-control" (change)="onSelectedFile($event)" />
+                                            <angular-file-uploader [config]="afuConfig " (ApiResponse)="avatarUpload($event) ">
+                                            </angular-file-uploader>
 
                                         </div>
                                     </div>

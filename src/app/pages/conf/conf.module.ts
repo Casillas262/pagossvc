@@ -11,12 +11,14 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { PlanesCreateComponent } from './planes/planes-create/planes-create.component';
 import { RolesViewComponent } from './roles/roles-view/roles-view.component';
 
 
 // paginacion
 import { NgxPaginationModule } from 'ngx-pagination';
+
+// angular file uploader
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CurrenciesEditComponent,
     PlanesEditComponent,
     PlanesIndexComponent,
-    PlanesCreateComponent,
     RolesViewComponent
 
   ],
@@ -35,7 +36,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CurrenciesEditComponent,
     PlanesEditComponent,
     PlanesIndexComponent,
-    PlanesCreateComponent,
     RolesViewComponent
   ],
   imports: [
@@ -47,7 +47,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SharedModule,
     PipesModule,
     BrowserAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AngularFileUploaderModule
   ]
 })
 export class ConfModule { }

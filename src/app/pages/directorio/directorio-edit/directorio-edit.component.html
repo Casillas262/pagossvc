@@ -32,26 +32,26 @@
                         <div class="card-body">
 
 
-                            <form class="form-horizontal form-material" #directoryForm="ngForm" enctype="multipart/form-data">
+                            <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm" enctype="multipart/form-data">
                                 <div class="row ">
 
 
                                     <div class="col-xs-12 col-sm-6 col-md-8">
                                         <div class=" col-md-6">
                                             <label>Nombres <span class="required">*</span></label>
-                                            <input type="text" [(ngModel)]="directory.nombre" name="nombre" class="form-control" required>
+                                            <input type="text" formControlName="nombre" class="form-control" required>
 
                                         </div>
                                         <div class=" col-md-6">
                                             <label>Apellidos <span class="required">*</span></label>
-                                            <input type="text" [(ngModel)]="directory.surname" name="surname" class="form-control" required>
+                                            <input type="text" formControlName="surname" class="form-control" required>
 
                                         </div>
 
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Especialidad <span class="required">*</span></label>
 
-                                            <select name="" id="input" class="form-control" name="especialidad" [(ngModel)]="directory.especialidad" required="required">
+                                            <select name="" id="input" class="form-control" formControlName="especialidad" required="required">
                                           <option value="">Seleccione</option>
                                           <option value="Cirugía Buco-maxilofacial">Cirugía Buco-maxilofacial</option>
                                           <option value="Cirugía Maxilofacial">Cirugía Maxilofacial</option>
@@ -59,60 +59,60 @@
                                         </div>
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Universidad <span class="required">*</span></label>
-                                            <input type="text" [(ngModel)]="directory.universidad" name="universidad" class="form-control" required>
+                                            <input type="text" formControlName="universidad" class="form-control" required>
 
                                         </div>
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Año de Graduación </label>
-                                            <input type="text" [(ngModel)]="directory.ano" name="ano" class="form-control">
+                                            <input type="text" formControlName="ano" class="form-control">
 
                                         </div>
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Sitio Web </label>
-                                            <input type="text" [(ngModel)]="directory.website" name="website" class="form-control">
+                                            <input type="text" formControlName="website" class="form-control">
                                         </div>
 
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Email<span class="required">*</span></label>
-                                            <input type="text" [(ngModel)]="directory.email" name="email" class="form-control" required>
+                                            <input type="text" formControlName="email" class="form-control" required>
 
                                         </div>
 
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Estado</label>
-                                            <input type="text" [(ngModel)]="directory.estado" name="estado" class="form-control">
+                                            <input type="text" formControlName="estado" class="form-control">
                                         </div>
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Ciudad</label>
-                                            <input type="text" [(ngModel)]="directory.ciudad" name="ciudad" class="form-control">
+                                            <input type="text" formControlName="ciudad" class="form-control">
                                         </div>
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Teléfonos</label>
-                                            <input type="text" [(ngModel)]="directory.telefonos" name="telefonos" class="form-control">
+                                            <input type="text" formControlName="telefonos" class="form-control">
                                         </div>
 
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Teléfonos Principal  <span class="required">*</span></label>
-                                            <input type="text" [(ngModel)]="directory.telprincipal" name="telprincipal" class="form-control" required>
+                                            <input type="text" formControlName="telprincipal" class="form-control" required>
 
                                         </div>
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Teléfonos Adicional(Opcional)</label>
-                                            <input type="text" [(ngModel)]="directory.tel1" name="tel1" class="form-control">
+                                            <input type="text" formControlName="tel1" class="form-control">
                                         </div>
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Teléfonos Móvil  </label>
-                                            <input type="text" [(ngModel)]="directory.telmovil" name="telmovil" class="form-control">
+                                            <input type="text" formControlName="telmovil" class="form-control">
 
                                         </div>
                                         <div class=" col-md-6">
                                             <label for="exampleInputEmail1">Teléfonos Home(Opcional)</label>
-                                            <input type="text" [(ngModel)]="directory.telhome" name="telhome" class="form-control">
+                                            <input type="text" formControlName="telhome" class="form-control">
                                         </div>
                                         <div class="col-md-12">
                                             <label>Dirección <span class="required">*</span></label>
                                             <div class="col-md-12">
-                                                <textarea [(ngModel)]="directory.direccion" name="direccion" cols="30" rows="4" class="form-control"></textarea>
+                                                <textarea formControlName="direccion" cols="30" rows="4" class="form-control"></textarea>
                                                 <!-- <ckeditor [editor]="Editor" id="direccion" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion" value="direccion" rows="5" class="form-control" required></ckeditor> -->
 
                                             </div>
@@ -120,7 +120,7 @@
                                         <div class="col-md-12">
 
                                             <label>Dirección Adicional (Opcional)</label>
-                                            <textarea [(ngModel)]="directory.direccion1" name="direccion1" cols="30" rows="4" class="form-control"></textarea>
+                                            <textarea formControlName="direccion1" cols="30" rows="4" class="form-control"></textarea>
                                             <!-- <ckeditor [editor]="Editor1" id="direccion1" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion1" value="direccion1" rows="5" class="form-control"></ckeditor> -->
 
                                         </div>
@@ -137,7 +137,7 @@
                                             <div class="form-group" style="margin-bottom: 25px;">
                                                 <label for="exampleInputuname">Status<span class="required">*</span></label>
                                                 <div class="input-group">
-                                                    <select name="status" id="input" class="form-control" [(ngModel)]="directory.status" required="required">
+                                                    <select name="status" id="input" class="form-control" formControlName="status" required="required">
                                                     <option value="">Seleccione</option>
                                                     <option value="PUBLISHED">Publicado</option>
                                                     <option value="PENDING">Pendiente</option>
@@ -153,13 +153,12 @@
                                                     <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
                                                     <div class="col-xs-12">
                                                         <label>Imagen Avatar</label>
-                                                        <input type="file" id="image" accept="image/*" name="image" class="form-control" (change)="onFileSelect($event)" />
-                                                        <!-- preview image -->
-                                                        <img [src]="directory.image | imagenPipe: 'directories'" style="width:100%; padding: 10px;
-                  border: 1px solid #ccc;
-                  margin-top: 30px;" class="shadow" alt="">
-
-                                                        <div [innerHTML]="uploadError" class="error"></div>
+                                                        <div *ngIf="infoDirectorio.image!=''">
+                                                            <button *ngIf="infoDirectorio.image" type="button" class="btn btn-outline-danger" (click)="deleteFotoPerfil()">Eliminar</button>
+                                                            <img [src]="infoDirectorio.image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
+                                                        </div>
+                                                        <angular-file-uploader [config]="afuConfig " (ApiResponse)="avatarUpload($event) ">
+                                                        </angular-file-uploader>
 
                                                     </div>
                                                 </div>
@@ -177,28 +176,28 @@
                                                     <label for="facebook" class="col-xs-12 col-form-label">
                                             <i class="bi bi-facebook"></i> Facebook</label>
                                                     <div class="col-11">
-                                                        <input type="text" class="form-control" [(ngModel)]="directory.facebook" name="facebook" placeholder="https://facebook.com/nameuser">
+                                                        <input type="text" class="form-control" formControlName="facebook" placeholder="https://facebook.com/nameuser">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="instagram" class="col-xs-12 col-form-label">
                                           <i class="bi bi-instagram"></i> Instagram</label>
                                                     <div class="col-11">
-                                                        <input type="text" class="form-control" [(ngModel)]="directory.instagram" name="instagram" placeholder="https://instagram.com/nameuser">
+                                                        <input type="text" class="form-control" formControlName="instagram" placeholder="https://instagram.com/nameuser">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="twitter" class="col-xs-12 col-form-label">
                                         <i class="bi bi-twitter"></i> Twitter</label>
                                                     <div class="col-11">
-                                                        <input type="text" class="form-control" [(ngModel)]="directory.twitter" name="twitter" placeholder="https://twitter.com/nameuser">
+                                                        <input type="text" class="form-control" formControlName="twitter" placeholder="https://twitter.com/nameuser">
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="linkedin" class="col-xs-12 col-form-label">
                                       <i class="bi bi-linkedin"></i> Linkedin</label>
                                                     <div class="col-11">
-                                                        <input type="text" class="form-control" [(ngModel)]="directory.linkedin" name="linkedin" placeholder="https://linkedin.com/nameuser">
+                                                        <input type="text" class="form-control" formControlName="linkedin" placeholder="https://linkedin.com/nameuser">
                                                     </div>
                                                 </div>
 
