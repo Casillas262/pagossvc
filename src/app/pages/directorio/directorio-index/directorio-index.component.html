@@ -59,6 +59,8 @@
                                     <th>Nombre</th>
                                     <th>Email</th>
                                     <th>Status</th>
+                                    <th>Estado</th>
+                                    <th>Accion</th>
                                     <th class="text-nowrap">Acciones</th>
                                 </tr>
                             </thead>
@@ -93,6 +95,22 @@
                                         <span class="badge bg-success" *ngIf="directory.status === 'PUBLISHED'">Publicado</span>
                                         <span class="badge bg-primary" *ngIf="directory.status === 'PENDING'">Pendiente</span>
                                         <span class="badge bg-danger" *ngIf="directory.status === 'REJECTED'">Rechazado</span>
+                                    </td>
+                                    <td>
+                                        <select class="form-control" [(ngModel)]="directory.status">
+                                        <option value="PUBLISHED">Publicado</option>
+                                        <option value="PENDING">Pendiente</option>
+                                        <option value="REJECTED">Rechazado</option>
+                                      </select>
+                                    </td>
+                                    <td class="text-nowrap text-center">
+
+                                        <a (click)="cambiarStatus(directory)" class="cursor" data-toggle="tooltip" data-original-title="Edit">
+                                            <button class="btn btn-outline-success">
+                                        <i class="bx bxs-check-circle text-success" style="font-size: 18px;"></i> Aceptar
+                                      </button>
+                                        </a>
+
                                     </td>
 
                                     <!-- <td><span [ngClass]="user.is_active == 1 ? 'badge bg-success' : 'badge bg-warning'" class="badge bg-success">{{user.is_active == 1? 'Activo':'Offline'}}</span></td> -->

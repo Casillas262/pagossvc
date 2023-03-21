@@ -186,7 +186,7 @@ this.user = this.userService.user;
       vcard: [this.vCardInfo],
       user_id: [''],
       image: [''],
-      status: [''],
+      status: ['PENDING'],
     })
   }
 
@@ -264,7 +264,7 @@ this.user = this.userService.user;
     formData.append('instagram', this.directorioForm.get('instagram').value);
     formData.append('twitter', this.directorioForm.get('twitter').value);
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
-    formData.append('status', this.directorioForm.get('status').value);
+    formData.append('status', 'PENDING');
     formData.append('image', this.directorioForm.get('image').value);
     formData.append('user_id', this.directorioForm.get('image').value);
     formData.append('vcard', this.vCardInfo);

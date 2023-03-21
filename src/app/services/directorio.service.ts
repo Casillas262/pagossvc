@@ -53,6 +53,11 @@ export class DirectorioService {
 
   }
 
+  update(directory: Directorio) {
+    const url = `${baseUrl}/directory/update/status/${directory.id}`;
+    return this.http.put(url, directory, this.headers);
+  }
+
 
 
   deleteFoto(id) {

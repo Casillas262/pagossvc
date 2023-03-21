@@ -23,6 +23,7 @@ export class DirectorioIndexComponent implements OnInit {
   usuarios: User[]=[];
   user: User;
   directories: Directorio;
+  directory: Directorio;
 
   p: number = 1;
   count: number = 8;
@@ -68,6 +69,15 @@ export class DirectorioIndexComponent implements OnInit {
     this.directorioService.deleteDirectorio(+id).subscribe(
       res=>{
         Swal.fire('Eliminado', 'directorio eliminado', 'success');
+        this.getDirectorios();
+      }
+    )
+  }
+
+  cambiarStatus(directory: Directorio){
+    this.directorioService.update(directory).subscribe(
+      resp =>{ console.log(resp);
+        Swal.fire('Actualizado', `actualizado correctamente`, 'success');
         this.getDirectorios();
       }
     )
