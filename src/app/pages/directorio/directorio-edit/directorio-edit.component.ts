@@ -25,7 +25,7 @@ export class DirectorioEditComponent implements OnInit {
   directory: Directorio;
   infoDirectorio: Directorio;
 
-  user!: User;
+  public user: User;
   userprofile!: User;
   id:any;
   error:string;
@@ -51,7 +51,7 @@ export class DirectorioEditComponent implements OnInit {
     method: 'POST',
     maxSize: '2',
     uploadAPI: {
-      url: environment.apiUrl + '/plan/upload',
+      url: environment.apiUrl + '/directory/upload',
       headers: {
         Accept: 'application/json',
         Authorization: 'Bearer ' + this.accountService.headers
@@ -85,6 +85,7 @@ export class DirectorioEditComponent implements OnInit {
     private userService: UserService,
     private location: Location,
     private accountService: AccountService,
+    private fb: FormBuilder,
 
   ) {
 this.user = this.userService.user;
@@ -96,6 +97,7 @@ this.user = this.userService.user;
     window.scrollTo(0, 0);
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormulario(id));
     this.getUser();
+    this.validarFormulario();
 
   }
 
@@ -112,7 +114,6 @@ this.user = this.userService.user;
 
     }
       this.id = this.user.id;
-
   }
 
   iniciarFormulario(id:number){
@@ -145,8 +146,12 @@ this.user = this.userService.user;
             twitter: res.twitter,
             linkedin: res.linkedin,
             vcard: this.vCardInfo,
+            user_id: res.user_id,
+            status: res.status,
           });
           // this.imagePath = res.image;
+          this.infoDirectorio = res;
+          console.log(this.infoDirectorio);
         }
       );
     } else {
@@ -154,21 +159,38 @@ this.user = this.userService.user;
     }
   }
 
-  avatarUpload(datos) {
-    const data = JSON.parse(datos.response);
-    this.directorioForm.controls['image'].setValue(data.image);//almaceno el nombre de la imagen
+  validarFormulario(){
+    this.directorioForm = this.fb.group({
+      id: [''],
+      nombre: ['', Validators.required],
+      surname: ['', Validators.required],
+      especialidad: ['', Validators.required],
+      universidad: ['', Validators.required],
+      ano: [''],
+      org: ['SVCBMF'],
+      website: [''],
+      email: ['', Validators.required],
+      direccion: ['', Validators.required],
+      direccion1: [''],
+      estado: [''],
+      ciudad: [''],
+      telefonos: [''],
+      tel1: [''],
+      telhome: [''],
+      telmovil: [''],
+      telprincipal: ['', Validators.required],
+      facebook: [''],
+      instagram: [''],
+      twitter: [''],
+      linkedin: [''],
+      vcard: [this.vCardInfo],
+      user_id: [''],
+      image: [''],
+      status: [''],
+    })
   }
 
-  deleteFotoPerfil(){
-    this.directorioService.deleteFoto(this.directorioForm.value['id']).subscribe(response => {
-      Swal.fire(response['msg']['summary'], response['msg']['detail'], 'success');
-      this.ngOnInit();
-    }, error => {
-      Swal.fire('Error al eliminar', 'Intente de nuevo', 'error');
-    });
-  }
-
-    get nombre() { return this.directorioForm.get('nombre'); }
+  get nombre() { return this.directorioForm.get('nombre'); }
     get surname() { return this.directorioForm.get('surname'); }
     get especialidad() { return this.directorioForm.get('especialidad'); }
     get universidad() { return this.directorioForm.get('universidad'); }
@@ -189,11 +211,35 @@ this.user = this.userService.user;
     get instagram() { return this.directorioForm.get('instagram'); }
     get twitter() { return this.directorioForm.get('twitter'); }
     get linkedin() { return this.directorioForm.get('linkedin'); }
-    get image() { return this.directorioForm.get('image'); }
+    get status() { return this.directorioForm.get('status'); }
+    get user_id() { return this.directorioForm.get('user_id'); }
+
+    get image() {
+      return this.directorioForm.get('image');
+    }
+
+  avatarUpload(datos) {
+    const data = JSON.parse(datos.response);
+    this.directorioForm.controls['image'].setValue(data.image);//almaceno el nombre de la imagen
+  }
+
+  deleteFotoPerfil(){
+    this.directorioService.deleteFoto(this.directorioForm.value['id']).subscribe(response => {
+      Swal.fire(response['msg']['summary'], response['msg']['detail'], 'success');
+      this.ngOnInit();
+    }, error => {
+      Swal.fire('Error al eliminar', 'Intente de nuevo', 'error');
+    });
+  }
+
+
 
 
   guardarDirectorio() {
     this.submitted = true;
+    if(this.directorioForm.invalid){
+      return;
+        }
 
     this.formularioVcardGe();
     const formData = new FormData();
@@ -201,7 +247,7 @@ this.user = this.userService.user;
     formData.append('surname', this.directorioForm.get('surname').value);
     formData.append('especialidad', this.directorioForm.get('especialidad').value);
     formData.append('universidad', this.directorioForm.get('universidad').value);
-    formData.append('org', this.directorioForm.get('org').value);
+    formData.append('org', 'SVCBMF');
     formData.append('ano', this.directorioForm.get('ano').value);
     formData.append('website', this.directorioForm.get('website').value);
     formData.append('email', this.directorioForm.get('email').value);
@@ -218,36 +264,37 @@ this.user = this.userService.user;
     formData.append('instagram', this.directorioForm.get('instagram').value);
     formData.append('twitter', this.directorioForm.get('twitter').value);
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
+    formData.append('status', this.directorioForm.get('status').value);
     formData.append('image', this.directorioForm.get('image').value);
+    formData.append('user_id', this.directorioForm.get('image').value);
     formData.append('vcard', this.vCardInfo);
 
     const id = this.directorioForm.get('id').value;
 
     if (id) {
-      this.directorioService.updateDirectorio(formData, +id).subscribe(
+      const data = {
+        ...this.directorioForm.value,
+         vcard: this.vCardInfo,
+        user_id: this.user.id
+      }
+      this.directorioService.updateDirectorio(data, +id).subscribe(
         res => {
-          if (this.error) {
-            // this.uploadError = res.message;
-            Swal.fire('Error', this.uploadError, 'error');
-          } else {
-            // this.router.navigate(['/directorio']);
-            this.infoDirectorio = res;
-            Swal.fire('Guardado', 'Los cambios fueron actualizados', 'success');
-          }
+          this.infoDirectorio = res;
+          Swal.fire('Guardado', 'Los cambios fueron actualizados', 'success');
+          this.router.navigate(['/dashboard/directorio']);
         },
         error => this.error = error
       );
     } else {
-      this.directorioService.createDirectorio(formData).subscribe(
+      const data = {
+        ...this.directorioForm.value,
+         vcard: this.vCardInfo,
+        user_id: this.user.id
+      }
+      this.directorioService.createDirectorio(data).subscribe(
         res => {
-          if (this.error) {
-
-            Swal.fire('Error', this.uploadError, 'error');
-          } else {
-
-            Swal.fire('Guardado', 'Los cambios fueron creados', 'success');
-            this.router.navigate(['/directorio']);
-          }
+          Swal.fire('Guardado', 'Los cambios fueron creados', 'success');
+            this.router.navigate(['/dashboard/directorio']);
         },
         error => this.error = error
       );

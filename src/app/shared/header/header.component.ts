@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CartItemModel } from 'src/app/models/cart-item-model';
+import { Directorio } from 'src/app/models/directorio';
 import { Plan } from 'src/app/models/plan';
 import { User } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account.service';
+import { MemberService } from 'src/app/services/member.service';
 import { MessageService } from 'src/app/services/message.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
@@ -23,9 +25,11 @@ export class HeaderComponent implements OnInit {
   private linktTheme = document.querySelector('.dark');// se comunica el id pulsado
 
 
-  userprofile!: User;
+  userprofile!: any;
 
-  public user: User;
+  infoDirectorio:Directorio;
+
+  user: User;
   error: string;
   id:any;
 
@@ -35,7 +39,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private memberService: MemberService,
     ) {}
 
 
@@ -71,7 +76,7 @@ export class HeaderComponent implements OnInit {
     }
 
     this.activatedRoute.params.subscribe( ({id}) => this.getUserProfile(id));
-
+    // this.activatedRoute.params.subscribe( ({id}) => this.iniciarmiembro(id));
   }
 
   getUserProfile(id:any){
@@ -80,13 +85,12 @@ export class HeaderComponent implements OnInit {
       res =>{
         this.userprofile = res[0];
         error => this.error = error
-        console.log(this.userprofile);
+        // console.log(this.userprofile);
+        // console.log(this.userprofile.directories[0].image);
       }
       );
-      // if(!this.userprofile[0].directory.image || this.userprofile[0].directory.image == undefined ){
-      //   return 'no-image.jpg'
-      // }
   }
+
 
 
 

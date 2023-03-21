@@ -78,14 +78,23 @@ export class MemberService {
 
   // }
 
-  updateMemberDirectory(directory): Observable<any> {
-    const url = `${baseUrl}/member/directory/update/${directory.id}`;
-     return this.http.post(url, directory, this.headers);
-   }
+  // updateMemberDirectory(directory): Observable<any> {
+  //   const url = `${baseUrl}/member/directory/update/${directory.id}`;
+  //    return this.http.post(url, directory, this.headers);
+  //  }
+
+   updateMemberDirectory(directory, id: number) {
+    return this.http.put<any>(baseUrl + '/member/directory/update/' + id, directory, this.headers)
+
+  }
 
   deleteMemberDirectory(directory:Directorio) {
     const url = `${baseUrl}/member/directory/destroy/${directory}`;
     return this.http.delete(url, this.headers);
+  }
+
+  deleteFoto(id) {
+    return this.http.delete(baseUrl + '/member/delete-foto/' + id);
   }
 
 }

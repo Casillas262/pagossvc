@@ -144,9 +144,6 @@
                                                     <option value="REJECTED">Rechazado</option>
                                                 </select>
                                                 </div>
-
-
-
                                             </div>
                                             <div class="col-xs-12 ">
                                                 <div class="form-group form-row">
@@ -159,7 +156,6 @@
                                                         </div>
                                                         <angular-file-uploader [config]="afuConfig " (ApiResponse)="avatarUpload($event) ">
                                                         </angular-file-uploader>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,7 +208,7 @@
                                             <div class="clear"></div>
                                             <!-- <a class="btn btn-primary" (click)="generateQRCode()">Generar QR</a> -->
                                             <a class="btn btn-primary" *ngIf="display" value="vCardInfo" (click)="hideQRCode()">Hide QR</a>
-                                            <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}">Download Image</a>
+                                            <!-- <a class="btn btn-primary" *ngIf="display" [href]="href" (click)="downloadImage()" download="QR_SVCBMF_{{directory.nombre}}_{{directory.surname}}">Download Image</a> -->
                                         </div>
                                     </div>
 

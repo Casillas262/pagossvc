@@ -320,9 +320,9 @@ export class UserDetailsComponent implements OnInit {
       const data = {
         ...this.directorioForm.value,
         user_id: this.user.id,
-        id: this.directory.id
+        // id: this.directory.id
       }
-      this.memberService.updateMemberDirectory(data).subscribe(
+      this.memberService.updateMemberDirectory(data, +id).subscribe(
         res => {
           if (this.errors) {
             this.errors = this.errors.error;

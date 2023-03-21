@@ -44,7 +44,8 @@ import { UsersComponent } from './users/users.component';
 // angular file uploader
 import { AngularFileUploaderModule } from 'angular-file-uploader';
 import { DirectoryModule } from './directorio/directory.module';
-
+//Qr
+import { QRCodeModule } from 'angular2-qrcode';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -101,7 +102,8 @@ import { DirectoryModule } from './directorio/directory.module';
     NgxSpinnerModule,
     NgxPaginationModule,
     AngularFileUploaderModule,
-    DirectoryModule
+    DirectoryModule,
+    QRCodeModule
 
   ],
   providers: [

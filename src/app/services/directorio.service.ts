@@ -49,7 +49,7 @@ export class DirectorioService {
   // }
 
   updateDirectorio(directory, id: number) {
-    return this.http.post<any>(baseUrl + '/directory/update/' + id, directory, this.headers)
+    return this.http.put<any>(baseUrl + '/directory/update/' + id, directory, this.headers)
 
   }
 

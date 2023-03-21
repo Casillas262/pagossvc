@@ -32,11 +32,11 @@
 
                     <div class="card">
                         <div class="card-body profile-card pt-4  fichasmall">
-                            <div *ngIf="!userprofile.directories.image">
-                                <img src="assets/images/no-image.jpg" class="rounded-circle">
+                            <div *ngIf="!infoDirectorio.image">
+                                <img [src]="infoDirectorio.image | imagenPipe: 'directories'" class="rounded-circle">
                             </div>
-                            <div *ngIf="userprofile.directories.image">
-                                <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                            <div *ngIf="infoDirectorio.image">
+                                <img [src]="infoDirectorio.image | imagenPipe: 'directories'" [alt]="user.username" class="rounded-circle">
                             </div>
                             <div class="inffichasmall">
                                 <h2>{{userprofile.username}}</h2>
@@ -136,30 +136,26 @@
                                 <!-- mi directorio                             -->
                                 <div class="tab-pane fade pt-3" id="profile-settings">
 
-                                    <div class="containera">
+                                    <div class="container">
                                         <div class="row">
                                             <div class="col-xs-6 col-sm-8">
                                                 <h5>{{pageTitle}}</h5>
                                             </div>
-                                            <!-- <div class="col-xs-6 col-sm-4">
-                                                <a [routerLink]="['/dashboard/directorio/edit/', userprofile.id]">
-                                                    <button class="btn btn-outline-success">Editar</button>
-                                                </a>
+                                            <div *ngIf="display" class="col-xs-6 col-sm-4">
                                                 <a [routerLink]="['/dashboard/directorio/view-public/', userprofile.id]">
                                                     <button class="btn btn-outline-success">Ver mi Tarjeta</button>
                                                 </a>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
 
                                     <hr>
                                     <div class="clear"></div>
-                                    <!-- directorio -->
-                                    <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" #directoryForm="ngForm">
+                                    <form class="form-horizontal form-material" (ngSubmit)="guardarDirectorio()" [formGroup]="directorioForm">
                                         <div class="row">
 
                                             <div class="col-xs-12 col-sm-6 col-md-8">
-                                                <div *ngIf="errors?.email" class="alert alert-danger mt-3">
+                                                <!-- <div *ngIf="errors?.email" class="alert alert-danger mt-3">
                                                     {{ errors?.email }}
                                                 </div>
                                                 <div *ngIf="errors?.password" class="alert alert-danger mt-3">
@@ -167,83 +163,83 @@
                                                 </div>
                                                 <div *ngIf="errors?.error" class="alert alert-danger mt-3">
                                                     {{ errors?.error }}
-                                                </div>
+                                                </div> -->
                                                 <div class="col-xs-12 col-md-6">
                                                     <label>Nombres <span class="required">*</span></label>
-                                                    <input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" required>
+                                                    <input type="text" formControlName="nombre" value="nombre" class="form-control" required>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label>Apellidos <span class="required">*</span></label>
-                                                    <input type="text" [(ngModel)]="surname" name="surname" class="form-control" required>
+                                                    <input type="text" formControlName="surname" value="surname" class="form-control" required>
 
                                                 </div>
 
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Especialidad <span class="required">*</span></label>
 
-                                                    <select name="especialidad" id="input" class="form-control" [(ngModel)]="especialidad" required="required">
-                                                <option value="">Seleccione</option>
-                                                <option value="Cirugía Buco-maxilofacial">Cirugía Buco-maxilofacial</option>
-                                                <option value="Cirugía Maxilofacial">Cirugía Maxilofacial</option>
-                                              </select>
+                                                    <select name="" id="input" class="form-control" formControlName="especialidad" required="required">
+                                              <option value="">Seleccione</option>
+                                              <option value="Cirugía Buco-maxilofacial">Cirugía Buco-maxilofacial</option>
+                                              <option value="Cirugía Maxilofacial">Cirugía Maxilofacial</option>
+                                            </select>
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Universidad <span class="required">*</span></label>
-                                                    <input type="text" [(ngModel)]="universidad" name="universidad" class="form-control" required>
+                                                    <input type="text" formControlName="universidad" class="form-control" required>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Año de Graduación </label>
-                                                    <input type="text" [(ngModel)]="ano" name="ano" class="form-control">
+                                                    <input type="text" formControlName="ano" class="form-control">
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Sitio Web </label>
-                                                    <input type="text" [(ngModel)]="website" name="website" class="form-control">
+                                                    <input type="text" formControlName="website" value="website" class="form-control">
                                                 </div>
 
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Email<span class="required">*</span></label>
-                                                    <input type="text" [(ngModel)]="email" name="email" class="form-control" required>
+                                                    <input type="text" formControlName="email" value="email" class="form-control" required>
 
                                                 </div>
 
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Estado</label>
-                                                    <input type="text" [(ngModel)]="estado" name="estado" class="form-control">
+                                                    <input type="text" formControlName="estado" class="form-control">
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Ciudad</label>
-                                                    <input type="text" [(ngModel)]="ciudad" name="ciudad" class="form-control">
+                                                    <input type="text" formControlName="ciudad" class="form-control">
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Teléfonos</label>
-                                                    <input type="text" [(ngModel)]="telefonos" name="telefonos" class="form-control">
+                                                    <input type="text" formControlName="telefonos" class="form-control">
                                                 </div>
 
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Teléfonos Principal  <span class="required">*</span></label>
-                                                    <input type="text" [(ngModel)]="telprincipal" name="telprincipal" class="form-control" required>
+                                                    <input type="text" formControlName="telprincipal" value="telprincipal" class="form-control" required>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Teléfonos Adicional(Opcional)</label>
-                                                    <input type="text" [(ngModel)]="tel1" name="tel1" class="form-control">
+                                                    <input type="text" formControlName="tel1" value="tel1" class="form-control">
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Teléfonos Móvil  </label>
-                                                    <input type="text" [(ngModel)]="telmovil" name="telmovil" class="form-control">
+                                                    <input type="text" formControlName="telmovil" value="telmovil" class="form-control">
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-6">
                                                     <label for="exampleInputEmail1">Teléfonos Home(Opcional)</label>
-                                                    <input type="text" [(ngModel)]="telhome" name="telhome" class="form-control">
+                                                    <input type="text" formControlName="telhome" value="telhome" class="form-control">
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <label>Dirección <span class="required">*</span></label>
                                                     <div class="col-md-12">
-                                                        <textarea [(ngModel)]="direccion" name="direccion" cols="30" rows="4" class="form-control"></textarea>
+                                                        <textarea formControlName="direccion" id="direccion" cols="30" rows="4" class="form-control"></textarea>
                                                         <!-- <ckeditor [editor]="Editor" id="direccion" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion" value="direccion" rows="5" class="form-control" required></ckeditor> -->
 
                                                     </div>
@@ -251,11 +247,16 @@
                                                 <div class="col-xs-12">
 
                                                     <label>Dirección Adicional (Opcional)</label>
-                                                    <textarea [(ngModel)]="direccion1" name="direccion1" cols="30" rows="4" class="form-control"></textarea>
+                                                    <textarea formControlName="direccion1" id="direccion1" cols="30" rows="4" class="form-control"></textarea>
                                                     <!-- <ckeditor [editor]="Editor1" id="direccion1" (ready)="onReady($event)" data="<p>Hello, world!</p>" formControlName="direccion1" value="direccion1" rows="5" class="form-control"></ckeditor> -->
 
                                                 </div>
                                                 <div class="clear"></div>
+                                                <br>
+                                                <br>
+                                                <hr>
+                                                <br>
+                                                <br>
                                                 <!----//-->
                                             </div>
                                             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -263,8 +264,12 @@
                                                     <div class="form-group form-row">
                                                         <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
                                                         <div class="col-xs-12">
-                                                            <input type="file" class="picture" id="image" accept=".jpg,.png, .jpeg, .gif" (change)="onSelectedFile($event)" />
-                                                            <div [innerHTML]="uploadError" class="error"></div>
+                                                            <div *ngIf="infoDirectorio.image!=''">
+                                                                <button *ngIf="infoDirectorio.image" type="button" class="btn btn-outline-danger" (click)="deleteFotoPerfil()">Eliminar</button>
+                                                                <img [src]="infoDirectorio.image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
+                                                            </div>
+                                                            <angular-file-uploader [config]="afuConfig " (ApiResponse)="avatarUpload($event) ">
+                                                            </angular-file-uploader>
 
                                                         </div>
 
@@ -282,30 +287,30 @@
                                                     <div class="redes">
                                                         <div class="row mb-3">
                                                             <label for="facebook" class="col-xs-12 col-form-label">
-                                                  <i class="fa fa-facebook"></i> Facebook</label>
+                                                <i class="bi bi-facebook"></i> Facebook</label>
                                                             <div class="col-11">
-                                                                <input type="text" class="form-control" [(ngModel)]="facebook" name="facebook" placeholder="https://facebook.com/nameuser">
+                                                                <input type="text" class="form-control" formControlName="facebook" value="facebook" placeholder="https://facebook.com/nameuser">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <label for="instagram" class="col-xs-12 col-form-label">
-                                                <i class="fa fa-instagram"></i> Instagram</label>
+                                              <i class="bi bi-instagram"></i> Instagram</label>
                                                             <div class="col-11">
-                                                                <input type="text" class="form-control" [(ngModel)]="instagram" name="instagram" placeholder="https://instagram.com/nameuser">
+                                                                <input type="text" class="form-control" formControlName="instagram" value="instagram" placeholder="https://instagram.com/nameuser">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <label for="twitter" class="col-xs-12 col-form-label">
-                                              <i class="fa fa-twitter"></i> Twitter</label>
+                                            <i class="bi bi-twitter"></i> Twitter</label>
                                                             <div class="col-11">
-                                                                <input type="text" class="form-control" [(ngModel)]="twitter" name="twitter" placeholder="https://twitter.com/nameuser">
+                                                                <input type="text" class="form-control" formControlName="twitter" value="twitter" placeholder="https://twitter.com/nameuser">
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
                                                             <label for="linkedin" class="col-xs-12 col-form-label">
-                                            <i class="fa fa-linkedin"></i> Linkedin</label>
+                                          <i class="bi bi-linkedin"></i> Linkedin</label>
                                                             <div class="col-11">
-                                                                <input type="text" class="form-control" [(ngModel)]="linkedin" name="linkedin" placeholder="https://linkedin.com/nameuser">
+                                                                <input type="text" class="form-control" formControlName="linkedin" value="linkedin" placeholder="https://linkedin.com/nameuser">
                                                             </div>
                                                         </div>
 
@@ -328,17 +333,17 @@
                                             </div>
                                         </div>
 
-                                        <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Guardar</button>
+                                        <input type="hidden" formControlName="id">
+                                        <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit" [disabled]="!directorioForm.valid">Guardar</button>
 
 
                                     </form>
 
                                 </div>
 
-
                                 <!-- Change Password Form -->
-                                <!-- <div class="tab-pane fade pt-3 profile-change-password profile-edit" id="profile-change-password">
-                                    <div class="clear"></div>
+                                <div class="tab-pane fade pt-3 profile-change-password profile-edit" id="profile-change-password">
+                                    <!-- Change Password Form -->
                                     <form [formGroup]="passwordForm" (ngSubmit)="cambiarPassword()">
                                         <div class="row mb-3">
                                             <h3>Cambiar contraseña</h3>
@@ -371,8 +376,9 @@
                                             <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Cambiar Contraseña</button>
                                         </div>
                                     </form>
+                                    <!-- End Change Password Form -->
 
-                                </div> -->
+                                </div>
                             </div>
                             <!-- End Bordered Tabs -->
 

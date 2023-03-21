@@ -17,6 +17,10 @@ import { AngularFileUploaderModule } from 'angular-file-uploader';
 //Qr
 import { QRCodeModule } from 'angular2-qrcode';
 
+// paginacion
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
 @NgModule({
   declarations: [
     DirectorioIndexComponent,
@@ -39,7 +43,8 @@ import { QRCodeModule } from 'angular2-qrcode';
     PipesModule,
     BrowserAnimationsModule,
     AngularFileUploaderModule,
-    QRCodeModule
+    QRCodeModule,
+    NgxPaginationModule
   ]
 })
 export class DirectoryModule { }

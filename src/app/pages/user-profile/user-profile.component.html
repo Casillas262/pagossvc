@@ -27,7 +27,12 @@
                     <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                            <img src="assets/images/no-image.jpg" alt="Profile" class="rounded-circle">
+                            <div *ngIf="!directory.image">
+                                <img [src]="directory.image | imagenPipe: 'directories'" class="rounded-circle">
+                            </div>
+                            <div *ngIf="directory.image">
+                                <img [src]="directory.image | imagenPipe: 'directories'" [alt]="user.username" class="rounded-circle">
+                            </div>
 
                             <h3>{{userprofile.username}}</h3>
                             <p>{{userprofile.email}}</p>
