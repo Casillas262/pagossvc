@@ -104,6 +104,15 @@ export class HeaderComponent implements OnInit {
       }
   }
 
+  openTopMenu(){
+
+    var modalcart = document.getElementsByClassName("dropdown-menu");
+      for (var i = 0; i<modalcart.length; i++) {
+         modalcart[i].classList.toggle("show");
+
+      }
+  }
+
   logout(){
     this.authService.logout();
   }

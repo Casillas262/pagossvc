@@ -151,7 +151,7 @@ this.user = this.userService.user;
           });
           // this.imagePath = res.image;
           this.infoDirectorio = res;
-          console.log(this.infoDirectorio);
+          // console.log(this.infoDirectorio);
         }
       );
     } else {
@@ -266,7 +266,7 @@ this.user = this.userService.user;
     formData.append('linkedin', this.directorioForm.get('linkedin').value);
     formData.append('status', 'PENDING');
     formData.append('image', this.directorioForm.get('image').value);
-    formData.append('user_id', this.directorioForm.get('image').value);
+    formData.append('user_id', this.directorioForm.get('user_id').value);
     formData.append('vcard', this.vCardInfo);
 
     const id = this.directorioForm.get('id').value;

@@ -69,7 +69,7 @@ export class PaymentEditComponent implements OnInit {
             validacion: res.validacion,
           });
           this.paymentSeleccionado = res;
-          console.log(this.paymentSeleccionado);
+          // console.log(this.paymentSeleccionado);
         }
       );
     } else {
@@ -93,7 +93,7 @@ export class PaymentEditComponent implements OnInit {
       this.paymentsService.update(data).subscribe(
         resp =>{
           Swal.fire('Actualizado', ` actualizado correctamente`, 'success');
-          console.log(this.paymentSeleccionado);
+          // console.log(this.paymentSeleccionado);
           this.router.navigateByUrl(`/dashboard/payments`);
         });
 

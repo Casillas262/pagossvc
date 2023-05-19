@@ -148,7 +148,7 @@ export class ReportarPagoComponent implements OnInit {
       res =>{
         this.currenciesAll = res;
         error => this.error = error
-        console.log(this.currenciesAll);
+        // console.log(this.currenciesAll);
       }
     );
   }
@@ -159,7 +159,7 @@ export class ReportarPagoComponent implements OnInit {
       res =>{
         this.planes = res;
         error => this.error = error
-        console.log(this.planes);
+        // console.log(this.planes);
       }
     );
   }
@@ -223,7 +223,7 @@ export class ReportarPagoComponent implements OnInit {
     .subscribe( (resp: any) =>{
       this.router.navigateByUrl(`/dashboard/historial-pagos`);
       this.pagoSeleccionado = resp;
-      console.log(this.pagoSeleccionado);
+      // console.log(this.pagoSeleccionado);
       this.emptyCart();
     })
 

@@ -28,9 +28,9 @@ export class ModalComponent implements OnInit {
 
   public PaymentRegisterForm: FormGroup;
   paymentSeleccionado:Payment;
-
   pagopaypal;
   user:User;
+
   constructor(
     public activeModal:NgbActiveModal,
     public router: Router,
@@ -86,7 +86,6 @@ export class ModalComponent implements OnInit {
       this.paymentService.create(data)
       .subscribe( (resp: any) =>{
         // Swal.fire('Creado', `creado correctamente`, 'success');
-        this.router.navigateByUrl(`/dashboard/historial-pagos`);
         this.enviarNotificacion();
         this.pagopaypal = resp;
         console.log(this.pagopaypal);

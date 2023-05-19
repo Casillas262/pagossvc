@@ -93,7 +93,7 @@ export class UserDetailsComponent implements OnInit {
       res =>{
         this.userdirectory = res[0];
         error => this.error = error
-        console.log(this.userdirectory);
+        // console.log(this.userdirectory);
       }
     );
   }

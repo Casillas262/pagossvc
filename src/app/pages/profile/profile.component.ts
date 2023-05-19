@@ -181,7 +181,7 @@ export class ProfileComponent implements OnInit {
             vcard: this.vCardInfo,
           });
           this.infoDirectorio = res;
-          console.log(this.infoDirectorio);
+          // console.log(this.infoDirectorio);
 
         }
 

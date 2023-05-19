@@ -76,7 +76,7 @@ export class CurrenciesEditComponent implements OnInit {
             name: res.name,
           });
           this.currencySeleccionado = res;
-          console.log(this.currencySeleccionado);
+          // console.log(this.currencySeleccionado);
         }
       );
     } else {

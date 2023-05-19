@@ -56,13 +56,13 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="javascript:void(0)" (click)="openTopMenu()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                        <div *ngIf="!this.userprofile.directories[0].image">
-                            <img [src]="this.userprofile.directories[0].image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
+                        <div *ngIf="!userprofile">
+                            <img [src]="userprofile.directories[0].image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
                         </div>
-                        <div *ngIf="this.userprofile.directories[0].image">
-                            <img [src]="this.userprofile.directories[0].image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
+                        <div *ngIf="userprofile">
+                            <img [src]="userprofile.directories[0].image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
 
                         </div>
                     </a>
@@ -81,7 +81,7 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="http://google.com" target="_blank"><i class="ti-world"></i> Ir al Landing </a></li>
+                            <li><a href="http://svcbmf.org" target="_blank"><i class="ti-world"></i> Ir al sitio </a></li>
                             <li><a (click)="logout()" style="cursor:pointer"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </div>

@@ -31,7 +31,7 @@ export class PaymentDetailsComponent implements OnInit {
       res =>{
         this.payment = res;
         error => this.error = error
-        console.log(this.payment);
+        // console.log(this.payment);
       }
     );
   }
@@ -40,7 +40,7 @@ export class PaymentDetailsComponent implements OnInit {
     this.paymentService.getPagoById(id).subscribe(
       res=>{
         this.payment = res;
-        console.log(this.payment);
+        // console.log(this.payment);
       }
     )
   }

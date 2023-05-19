@@ -104,7 +104,7 @@ export class PlanesEditComponent implements OnInit {
             status: res.status,
           });
           this.planSeleccionado = res;
-          console.log(this.planSeleccionado);
+          // console.log(this.planSeleccionado);
         }
       );
     } else {
@@ -172,7 +172,7 @@ export class PlanesEditComponent implements OnInit {
         resp =>{
           // Swal.fire('Actualizado', `actualizado correctamente`, 'success');
           this.router.navigateByUrl(`/dashboard/planes`);
-          console.log(this.planSeleccionado);
+          // console.log(this.planSeleccionado);
         });
 
     }else{

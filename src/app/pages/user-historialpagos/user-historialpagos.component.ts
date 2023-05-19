@@ -45,7 +45,7 @@ export class UserHistorialpagosComponent implements OnInit {
 
     this.userService.getUserById(this.id).subscribe((data: any) => {
       this.userProfile = data[0];
-      console.log('userProfile',this.userProfile)
+      // console.log('userProfile',this.userProfile)
     });
   }
 

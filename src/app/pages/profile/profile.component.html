@@ -32,10 +32,10 @@
 
                     <div class="card">
                         <div class="card-body profile-card pt-4  fichasmall">
-                            <div *ngIf="!infoDirectorio.image">
+                            <div *ngIf="!infoDirectorio">
                                 <img [src]="infoDirectorio.image | imagenPipe: 'directories'" class="rounded-circle">
                             </div>
-                            <div *ngIf="infoDirectorio.image">
+                            <div *ngIf="infoDirectorio">
                                 <img [src]="infoDirectorio.image | imagenPipe: 'directories'" [alt]="user.username" class="rounded-circle">
                             </div>
                             <div class="inffichasmall">
@@ -264,7 +264,7 @@
                                                     <div class="form-group form-row">
                                                         <p>Subir Imagen (peso max: 500kb | medidas max: 226x226px | formato jpg)</p>
                                                         <div class="col-xs-12">
-                                                            <div *ngIf="infoDirectorio.image!=''">
+                                                            <div *ngIf="infoDirectorio!=''">
                                                                 <button *ngIf="infoDirectorio.image" type="button" class="btn btn-outline-danger" (click)="deleteFotoPerfil()">Eliminar</button>
                                                                 <img [src]="infoDirectorio.image | imagenPipe: 'directories'" style="height: 50px; width: 50px;" class="img-circle avatar">
                                                             </div>

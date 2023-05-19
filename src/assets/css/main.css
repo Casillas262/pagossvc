@@ -39,6 +39,10 @@
     --font-family: 'HelveticaNeueLTStd-Roman';
 }
 
+.profile-card .rounded-circle {
+    height: 100px;
+}
+
 html body .b-r {
     border-right: 1px solid rgba(120, 130, 140, 0.13);
 }

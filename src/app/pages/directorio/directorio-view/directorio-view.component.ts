@@ -41,7 +41,7 @@ export class DirectorioViewComponent implements OnInit {
       res =>{
         this.directory = res;
         error => this.error = error;
-        console.log(this.directory);
+        // console.log(this.directory);
       }
     );
   }
@@ -51,7 +51,7 @@ export class DirectorioViewComponent implements OnInit {
       res =>{
         this.userprofile = res[0];
         error => this.error = error
-        console.log(this.userprofile);
+        // console.log(this.userprofile);
       }
     );
   }

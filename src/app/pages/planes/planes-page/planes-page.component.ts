@@ -38,7 +38,7 @@ export class PlanesPageComponent implements OnInit {
       res =>{
         this.planes = res;
         error => this.error = error
-        console.log(this.planes);
+        // console.log(this.planes);
       }
     );
   }

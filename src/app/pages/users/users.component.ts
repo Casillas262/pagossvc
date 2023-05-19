@@ -48,12 +48,9 @@ export class UsersComponent implements OnInit {
   }
 
   getUser(): void {
-
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
-    console.log(this.user.id);
-
-
+    // console.log(this.user);
+    // console.log(this.user.id);
   }
 
 
@@ -63,7 +60,7 @@ export class UsersComponent implements OnInit {
       res =>{
         this.usuarios = res;
         error => this.error = error;
-        console.log(this.usuarios);
+        // console.log(this.usuarios);
       }
     );
   }

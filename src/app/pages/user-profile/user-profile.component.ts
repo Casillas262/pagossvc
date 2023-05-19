@@ -22,6 +22,7 @@ export class UserProfileComponent implements OnInit {
   userprofile: User;
   error: string;
   directories: Directorio;
+  directory: Directorio;
   payments: Payment;
   id:number;
 
@@ -29,7 +30,7 @@ export class UserProfileComponent implements OnInit {
 
   p: number = 1;
   count: number = 8;
-  directory: Directorio;
+
   constructor(
     private userService: UserService,
     private paymentService: PaymentService,
@@ -46,7 +47,6 @@ export class UserProfileComponent implements OnInit {
     window.scrollTo(0,0);
     this.closeMenu();
     this.activatedRoute.params.subscribe( ({id}) => this.getUserRemoto(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getDirectory(id));
   }
 
   closeMenu(){
@@ -58,11 +58,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser(): void {
-
     this.user = JSON.parse(localStorage.getItem('user'));
-    // return this.userService.getUserLocalStorage();
-    // console.log(this.user);
-
 
   }
 
@@ -71,24 +67,11 @@ export class UserProfileComponent implements OnInit {
       res =>{
         this.userprofile = res[0];
         error => this.error = error
-        console.log(this.userprofile);
-      }
-    );
-
-
-  }
-
-  getDirectory(id:number): void {
-    // id = this.directory.user_id;
-
-    this.directorioService.getDirectorio(id).subscribe(
-      res =>{
-        this.directory = res;
-        error => this.error = error;
-        console.log(this.directory);
+        // console.log(this.userprofile);
       }
     );
   }
+
 
 
   goBack() {

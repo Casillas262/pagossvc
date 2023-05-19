@@ -72,7 +72,7 @@ export class DirectorioViewPublicComponent implements OnInit {
       res =>{
         this.userprofile = res[0];
         error => this.error = error
-        console.log(this.userprofile);
+        // console.log(this.userprofile);
       }
     );
     // id = this.userprofile.id;
@@ -87,7 +87,7 @@ export class DirectorioViewPublicComponent implements OnInit {
       res =>{
         this.directory = res;
         error => this.error = error;
-        console.log(this.directory);
+        // console.log(this.directory);
       }
     );
   }
