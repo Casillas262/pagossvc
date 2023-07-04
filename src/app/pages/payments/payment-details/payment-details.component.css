@@ -3,9 +3,30 @@
     padding: 20px;
     flex-flow: row;
     font-size: 15px;
+    flex-direction: row;
 }
 
 .pagodetail p {
     margin: 0;
     padding: 0;
+}
+
+.imagepago {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .pagodetail {
+        display: flex;
+        padding: 20px;
+        flex-flow: row;
+        font-size: 15px;
+        flex-direction: column;
+    }
+    .imagepago {
+        width: 100%;
+    }
 }

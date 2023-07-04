@@ -15,7 +15,7 @@
                 <th><a [routerLink]="['/dashboard/user/', user.id]">{{user.email}}</a></th>
                 <td>
                     <!-- {{user.role}} -->
-                    <span class="badge bg-dark-light" *ngIf="user.role === 'SUPERADMIN'">SuperAdmin</span>
+                    <span class="badge bg-dark" *ngIf="user.role === 'SUPERADMIN'">SuperAdmin</span>
                     <span class="badge bg-primary" *ngIf="user.role === 'ADMIN'">Admin</span>
                     <span class="badge bg-success" *ngIf="user.role === 'MEMBER'">Miembro</span>
                     <span class="badge bg-secondary" *ngIf="user.role === 'GUEST'">Invitado</span>

@@ -37,10 +37,9 @@ export class PaymentDetailsComponent implements OnInit {
   }
 
   getPagoById(id:number){
-    this.paymentService.getPagoById(id).subscribe(
+    this.paymentService.getPagoById(+id).subscribe(
       res=>{
         this.payment = res;
-        // console.log(this.payment);
       }
     )
   }

@@ -11,6 +11,7 @@ export class Payment {
    bank_name?:string;
    monto:string;
    currency_id?:Currencies;
+   currencies:Currencies;
    referencia?:string;
    image?:string;
 

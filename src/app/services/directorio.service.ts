@@ -121,5 +121,10 @@ export class DirectorioService {
     });
   }
 
+  search(query=''){
+    return this.http.get(`${baseUrl}/directory/search`, {params: {buscar: query}})
+
+  }
+
 
 }

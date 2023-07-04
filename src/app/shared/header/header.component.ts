@@ -85,8 +85,6 @@ export class HeaderComponent implements OnInit {
       res =>{
         this.userprofile = res[0];
         error => this.error = error
-        // console.log(this.userprofile);
-        // console.log(this.userprofile.directories[0].image);
       }
       );
   }

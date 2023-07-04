@@ -14,11 +14,12 @@
         </div>
         <div class="right shadow animated fadeIn">
 
-            <p>Plan: </p>
-            <div *ngIf="userprofile.role == 'MEMBER'">
+            <div *ngIf="user.role == 'MEMBER'">
+                <p>Plan: Miembro </p>
                 <span class="badge bg-success">Activo</span>
             </div>
-            <div *ngIf="userprofile.role == 'GUEST'">
+            <div *ngIf="user.role == 'GUEST'">
+                <p>Plan: Invitado </p>
                 <span class="badge bg-primary">Inactivo</span>
             </div>
         </div>
@@ -46,24 +47,14 @@
 
                 <div class="card profile shadow">
 
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Operaciones</h6>
-                            </li>
-
-                            <li><a class="dropdown-item" [routerLink]="['/dashboard/profile/', user.id]">Mi Cuenta</a></li>
-
-                        </ul>
-                    </div>
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                         <div *ngIf="!userprofile.directories.image">
-                            <img src="assets/images/no-image.jpg" class="rounded-circle">
+                            <img src="./assets/images/no-image.jpg" style="height: 80px; width: 80px;" class="img-circle avatar">
                         </div>
                         <div *ngIf="userprofile.directories.image">
-                            <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
+                            <img [src]="userprofile.directories[0].image | imagenPipe: 'directories'" style="height: 80px; width: 80px;" class="img-circle avatar">
+
                         </div>
                         <h2>{{user.username}}</h2>
 
@@ -83,9 +74,9 @@
                             <li class="nav-item">
                                 <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#news">Actualidad</button>
                             </li>
-                            <li class="nav-item" *ngIf="userprofile.role == 'MEMBER'">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recentPayments">News</button>
-                            </li>
+                            <!-- <li class="nav-item" *ngIf="userprofile.role == 'MEMBER'">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#divisas">Divisas</button>
+                            </li> -->
                             <!-- <div *ngIf="user.role === 'MEMBER'">
 
                             </div> -->
@@ -96,9 +87,11 @@
 
                             <div class="tab-pane fade show active news" id="news">
                                 <br />
-                                <app-dolar-today></app-dolar-today>
-                            </div>
-                            <div class="tab-pane fade show  recentPayments" id="recentPayments">
+
+                                <div *ngIf="user.role === 'GUEST'">
+                                    <p>Cancela o reporta el pago de tu membresia para ver mas opociones</p>
+                                </div>
+
                                 <div *ngIf="user.role === 'MEMBER'">
                                     <h4>Bienvenido!</h4>
                                     <p>Ahora puedes editar tu informacion del directorio de SVCBMF</p>
@@ -107,10 +100,12 @@
                                     </a>
                                 </div>
                                 <div *ngIf="user.role === 'MEMBER'">
-                                    <!-- <app-planesyproductos></app-planesyproductos> -->
                                     <app-news></app-news>
                                 </div>
                             </div>
+                            <!-- <div class="tab-pane fade show  divisas" id="divisas">
+                                <app-dolar-today></app-dolar-today>
+                            </div> -->
 
 
 

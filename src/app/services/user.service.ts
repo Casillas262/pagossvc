@@ -18,6 +18,7 @@ const baseUrl = environment.apiUrl;
 export class UserService {
 
   public user: User;
+  public recientes: User;
   public identity: User;
   // public role: Role;
   error:string;
@@ -80,10 +81,10 @@ export class UserService {
   }
 
   getRecientes(): Observable<any> {
-    const url = `${baseUrl}/user/recientes/`;
+    const url = `${baseUrl}/users/recientes`;
     return this.http.get<any>(url, this.headers)
       .pipe(
-        map((resp:{ok: boolean, users: User}) => resp.users)
+        map((resp:{ok: boolean, recientes: User}) => resp.recientes)
       )
   }
 
@@ -138,6 +139,10 @@ export class UserService {
     return this.http.post(url,  this.headers);
   }
 
+  search(query=''){
+    return this.http.get(`${baseUrl}/users/search`, {params: {buscar: query}})
+
+  }
 
 
 

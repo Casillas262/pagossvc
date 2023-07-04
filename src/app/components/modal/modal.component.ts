@@ -63,7 +63,7 @@ export class ModalComponent implements OnInit {
 
   procesarPagoPaypal(reference: any, email: any, name: any, surname: any,
     status: any, amount: any, items:any,
-    ){debugger
+    ){
     //crear
 
     let data = {

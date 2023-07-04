@@ -22,7 +22,7 @@ export class DirectorioIndexComponent implements OnInit {
   usersCount = 0;
   usuarios: User[]=[];
   user: User;
-  directories: Directorio;
+  directories: any;
   directory: Directorio;
 
   p: number = 1;
@@ -30,6 +30,7 @@ export class DirectorioIndexComponent implements OnInit {
 
   error: string;
   msm_error: string;
+  query:string ='';
 
 
   ServerUrl = environment.apiUrl;
@@ -81,6 +82,16 @@ export class DirectorioIndexComponent implements OnInit {
         this.getDirectorios();
       }
     )
+  }
+
+  search() {
+    return this.directorioService.search(this.query).subscribe(
+      res=>{
+        this.directories = res;
+        if(!this.query){
+          this.ngOnInit();
+        }
+      });
   }
 
 }

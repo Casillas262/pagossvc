@@ -16,13 +16,13 @@ export class PaymentsComponent implements OnInit {
 
   title = "Pagos"
 
-  payments: Payment;
+  payments: any;
   error:string;
   p: number = 1;
   count: number = 8;
 
   public user;
-
+  query:string ='';
 
 
 
@@ -50,16 +50,15 @@ export class PaymentsComponent implements OnInit {
       }
   }
 
-  //carga usos desde la app
-  // getPagos_list(){
-  //   this.paymentService.carga_info().subscribe(
-  //     res=>{
-  //       this.pagos = res;
-  //       console.log(res)
-  //     }
-  //   )
-  // }
-
+  search() {
+    return this.paymentService.search(this.query).subscribe(
+      res=>{
+        this.payments = res;
+        if(!this.query){
+          this.ngOnInit();
+        }
+      });
+  }
 
 
   getPagos(): void {

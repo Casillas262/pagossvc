@@ -1,10 +1,6 @@
 <!-- =======| Main |======= -->
 
 
-<div *ngIf="!userprofile">
-    No info
-</div>
-
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="profile" *ngIf="userprofile">
 
     <div class="col-xs-12">
@@ -33,7 +29,7 @@
                     <div class="card">
                         <div class="card-body profile-card pt-4  fichasmall">
                             <div *ngIf="!infoDirectorio">
-                                <img [src]="infoDirectorio.image | imagenPipe: 'directories'" class="rounded-circle">
+                                <img src="./assets/images/no-image.jpg" class="rounded-circle">
                             </div>
                             <div *ngIf="infoDirectorio">
                                 <img [src]="infoDirectorio.image | imagenPipe: 'directories'" [alt]="user.username" class="rounded-circle">
@@ -65,12 +61,10 @@
                                     <li class="nav-item">
                                         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
                                     </li>
-
-
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar
                     Contraseña</button>
-                                    </li>
+                                    </li> -->
 
                                 </ul>
 

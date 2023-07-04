@@ -132,7 +132,7 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
-  onSelectedFile(event) {debugger
+  onSelectedFile(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.profileForm.get('image').setValue(file.name);
@@ -146,7 +146,7 @@ export class UserDetailsComponent implements OnInit {
   get username() { return this.profileForm.get('username'); }
 
 
-  updateForm() {debugger
+  updateForm() {
 
 
     const formData = new FormData();
@@ -284,7 +284,7 @@ export class UserDetailsComponent implements OnInit {
 
 
 
-  guardarDirectorio() {debugger
+  guardarDirectorio() {
 
     this.formularioVcardGe();
 

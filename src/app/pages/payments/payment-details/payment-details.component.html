@@ -34,16 +34,16 @@
                         <span class="badge bg-primary" *ngIf="payment.status === 'PENDING'">Pendiente</span>
                         <span class="badge bg-danger" *ngIf="payment.status === 'REJECTED'">Rechazado</span>
                     </p>
-                    <p><b>Monto:</b> {{payment.currency_id}} {{payment.monto}}</p>
+                    <!-- <p><b>Monto:</b> {{payment.currencies.name}} {{payment.monto}}</p> -->
+                    <p><b>Monto:</b> {{payment.monto}}</p>
+
                     <p><b>ProductoId:</b> <a [routerLink]="['/dashboard/plan/', payment.plan_id]">
                   {{payment.plan_id}}
                 </a></p>
-                </div>
-                <div class="col-xs-12 col-sm-6">
                     <!-- <p><b>Email:</b> {{pago.email}}</p> -->
                     <p><b>Metodo de Pago:</b> {{payment.metodo}}</p>
                     <div *ngIf="payment.bank_name">
-                        <p><b>Nombre del Banco:</b> {{pago.bank_name}}</p>
+                        <p><b>Nombre del Banco:</b> {{payment.bank_name}}</p>
                     </div>
                     <p><b>Validación:</b>
                         <span class="badge bg-success" *ngIf="payment.validacion === 'APPROVED'">Aprobado</span>
@@ -51,10 +51,16 @@
                         <span class="badge bg-danger" *ngIf="payment.validacion === 'REJECTED'">Rechazado</span>
                     </p>
                     <!-- <p><b>Txn Id:</b> {{pago.}}</p> -->
+                </div>
+                <div class="col-xs-12 col-sm-6">
 
-                    <img [src]="payment.image | imagenPipe: 'payments'" style="width:100%; padding: 10px;
-                border: 1px solid #ccc;
-                margin-top: 30px;" class="shadow" alt="">
+
+                    <div *ngIf="!payment.image">
+                        <img src="./assets/images/no-image.jpg" class="image" class="shadow imagepago" alt="">
+                    </div>
+                    <div *ngIf="payment.image">
+                        <img [src]="payment.image | imagenPipe: 'payments'" class="shadow imagepago" alt="">
+                    </div>
                 </div>
 
             </div>

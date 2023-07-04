@@ -55,10 +55,10 @@ export class ContactComponent implements OnInit {
     this.cmspageService.contactForm(this.contactForm.value).subscribe(
       res => {
         if (this.error) {
-          // Swal.fire('Error', this.error, 'error');
+          Swal.fire('Error', this.error, 'error');
           console.log(this.error)
         } else {
-          // Swal.fire('Enviado!', 'El email fue enviado', 'success');
+          Swal.fire('Enviado!', 'El email fue enviado', 'success');
           this.router.navigate(['/']);
         }
       },

@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
 
   loading = false;
   usersCount = 0;
-  usuarios: User[]=[];
+  usuarios: any;
   user: User;
   roles;
 
@@ -26,7 +26,7 @@ export class UsersComponent implements OnInit {
 
   error: string;
   msm_error: string;
-
+  query:string ='';
 
   ServerUrl = environment.apiUrl;
   doctores;
@@ -67,10 +67,6 @@ export class UsersComponent implements OnInit {
 
 
 
-  // showDeleteConfirm(id: any) {
-  //   this.confirmService.openConfirmDialog("Seguro que desea borrar este usuario?" + id, "Eliminar", this.proced, id.toString(),this);
-
-  // }
 
   eliminarUser(user:User){
     this.userService.deleteById(user).subscribe(
@@ -96,52 +92,15 @@ export class UsersComponent implements OnInit {
       }
   }
 
-  /*
-   proced - Esta función se ejecuta en el ambito del servicio confirmService y no en esta clase.
-            Por eso paso por referencia este objecto en la variable that y así poder ejecutar estos metodos.
-
-   */
-  public proced(id?: string, that?:any): void {
-
-    if (id && that) {
-
-      that.userService.deleteById(id).subscribe();
-
-    }
+  search() {
+    return this.userService.search(this.query).subscribe(
+      res=>{
+        this.usuarios = res;
+        if(!this.query){
+          this.ngOnInit();
+        }
+      });
   }
-
-
-
-
-  // search( text: string) {// funciona, devuelve la busqueda
-
-
-  //   if( this.search.length == 0){
-  //     return;
-  //   }
-
-  //   return this.http.get(this.ServerUrl + 'api_directorio/search?text=' + text )
-  //     .toPromise()
-  //     .then(doctores=>{
-  //       this.doctores= {'results': JSON.stringify(doctores, null),
-
-  //       'json': ()=>{
-  //         return doctores;
-  //       }
-
-  //     };
-
-  //     // devolver el array
-  //     const mapped = Object.keys(doctores)
-  //     .map(key => ({type: key, value: doctores[key]}));
-  //     console.log(doctores);
-  //     this.doctores = doctores;
-
-  //     });
-
-  // }
-
-
 
 
 

@@ -39,7 +39,7 @@ export class ReciboFacturaComponent implements OnInit {
     this.getCurrencies()
   }
 
-  getPagoById(id:number){debugger
+  getPagoById(id:number){
     this.paymentService.getPagosbyUser(id).subscribe(
       res=>{
         this.pago = res;

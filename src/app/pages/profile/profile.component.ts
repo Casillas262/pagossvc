@@ -30,8 +30,6 @@ export class ProfileComponent implements OnInit {
 
   user: User;
   userprofile: User;
-
-
   profileSeleccionado: User;
 
   directorioForm: FormGroup;
@@ -463,12 +461,12 @@ iniciarFormularioPassword(id:number){
     }
   }
 
-cambiarPassword(){debugger
+cambiarPassword(){
   this.formSumitted = true;
 
   const {name } = this.passwordForm.value;
 
-  if(this.userprofile){debugger
+  if(this.userprofile){
     //actualizar
     const data = {
       ...this.passwordForm.value,

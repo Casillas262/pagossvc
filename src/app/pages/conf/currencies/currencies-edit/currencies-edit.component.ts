@@ -89,7 +89,7 @@ export class CurrenciesEditComponent implements OnInit {
 
     const {name } = this.currencyForm.value;
 
-    if(this.currencySeleccionado){debugger
+    if(this.currencySeleccionado){
       //actualizar
       const data = {
         ...this.currencyForm.value,

@@ -53,7 +53,7 @@ export class PaymentService {
       )
   }
 
-  getPagoById(id): Observable<any> {
+  getPagoById(id:number): Observable<any> {
     const url = `${baseUrl}/payment/show/${id}`;
     return this.http.get<any>(url, this.headers)
       .pipe(
@@ -105,6 +105,11 @@ export class PaymentService {
       .pipe(
         map((resp:{ok: boolean, payments: Payment}) => resp.payments)
       )
+  }
+
+  search(query=''){
+    return this.http.get(`${baseUrl}/payment/search`, {params: {buscar: query}})
+
   }
 
 }

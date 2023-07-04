@@ -1,6 +1,6 @@
 .main {
     width: 350px;
-    height: 90vh;
+    height: 78vh;
     background: red;
     overflow: hidden;
     position: relative;
@@ -181,7 +181,7 @@ button:hover {
     width: 100%;
     background: #eee;
     border-radius: 60% / 10%;
-    transform: translateY(50px);
+    transform: translateY(10px);
     transition: .8s ease-in-out;
     justify-content: center;
     align-content: center;
@@ -259,7 +259,7 @@ button:hover {
     }
     .main {
         width: 350px;
-        height: 76vh;
+        height: 520px;
         border-radius: 0px;
     }
     .main img {
@@ -277,7 +277,7 @@ button:hover {
 
 @media(max-width:375px) {
     #chk:checked~.login {
-        transform: translateY(-330px);
+        transform: translateY(-350px);
     }
     .login {
         height: 580px;

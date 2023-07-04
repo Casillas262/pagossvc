@@ -103,7 +103,7 @@ export class PaymentEditComponent implements OnInit {
 
   }
 
-  // cambiarPayment(){debugger
+  // cambiarPayment(){
   //   this.paymentsService.update(this.payment).subscribe(
   //     resp =>{ console.log(resp);
   //       Swal.fire('Actualizado', `actualizado correctamente`, 'success');

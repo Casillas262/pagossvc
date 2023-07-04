@@ -68,24 +68,22 @@ export class CartComponent implements OnInit {
       currency: 'USD',
       clientId: environment.clientId,
       // clientId: 'sb',
-      createOrderOnClient: (data) => < ICreateOrderRequest > {
-
-
-          intent: 'CAPTURE',
-          purchase_units: [{
-              amount: {
-                  currency_code: 'USD',
-                  value: this.getTotal().toString(),
-                  breakdown: {
-                      item_total: {
-                          currency_code: 'USD',
-                          value: this.getTotal().toString(),
-                      }
-                  }
-              },
-              items: this.getItemsList(),
-          }]
-        },
+      createOrderOnClient: (data) => < ICreateOrderRequest > <unknown>{
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'USD',
+            value: this.getTotal().toString(),
+            breakdown: {
+              item_total: {
+                currency_code: 'USD',
+                value: this.getTotal().toString(),
+              }
+            }
+          },
+          items: this.getItemsList(),
+        }]
+      },
         advanced: {
             commit: 'true'
         },
@@ -98,7 +96,7 @@ export class CartComponent implements OnInit {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
           actions.order.get().then((details: any) => {
               console.log('onApprove - you can get full order details inside onApprove: ', details);
-
+              data.orderID
           });
 
       },
