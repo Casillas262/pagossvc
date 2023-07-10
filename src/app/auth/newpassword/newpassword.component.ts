@@ -20,24 +20,21 @@ export class NewpasswordComponent implements OnInit {
 
   public formSumitted = false;
 
-  public passwordForm = this.fb.group({
-    email: [ null, [Validators.required] ],
-    password: [null, Validators.required],
-    password2: [null, Validators.required],
-    resetToken: [null],
+  public passwordForm = {
 
-  }, {
-    validators: this.passwordsIguales('password', 'password2')
+    email: null,
+    password: null,
+    password2: null,
+    resetToken: null,
+  };
 
-  });
   constructor(
     private router: Router,
     private activatedRouter: ActivatedRoute,
-    private fb: FormBuilder,
     private accountService: AccountService,
   ) {
-    activatedRouter.queryParams.subscribe(params=>{
-      this.resetToken = params['auth_token'];
+    activatedRouter.queryParams.subscribe(params =>{
+      this.passwordForm.resetToken = params['token']
     })
   }
 
@@ -45,16 +42,16 @@ export class NewpasswordComponent implements OnInit {
   }
 
 
-passwordNoValido(){
-  const pass1 = this.passwordForm.get('password').value;
-  const pass2 = this.passwordForm.get('password2').value;
+// passwordNoValido(){
+//   const pass1 = this.passwordForm.get('password').value;
+//   const pass2 = this.passwordForm.get('password2').value;
 
-  if((pass1 !== pass2) && this.formSumitted){
-    return true;
-  }else{
-    return false;
-  }
-}
+//   if((pass1 !== pass2) && this.formSumitted){
+//     return true;
+//   }else{
+//     return false;
+//   }
+// }
 
 passwordsIguales(pass1Name: string, pass2Name: string){
   return (formGroup: FormGroup) =>{
@@ -71,7 +68,7 @@ passwordsIguales(pass1Name: string, pass2Name: string){
 
 newPassword(){
 
-  this.accountService.changePassword(this.passwordForm.value).subscribe(
+  this.accountService.changePassword(this.passwordForm).subscribe(
     resp =>{
 
       Swal.fire('Exito!', `Contraseña Actualizada`, 'success');

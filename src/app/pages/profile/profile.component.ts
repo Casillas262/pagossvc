@@ -429,10 +429,10 @@ iniciarFormularioPassword(id:number){
     this.passwordForm = this.fb.group({
       id: [''],
       email: ['', Validators.required],
-      password: ['', Validators.required],
-    password2: ['', Validators.required],
+    //   password: ['', Validators.required],
+    // password2: ['', Validators.required],
     }, {
-      validators: this.passwordsIguales('password', 'password2')
+      // validators: this.passwordsIguales('password', 'password2')
 
     });
   }
@@ -464,7 +464,7 @@ iniciarFormularioPassword(id:number){
 cambiarPassword(){
   this.formSumitted = true;
 
-  const {name } = this.passwordForm.value;
+  const {email } = this.passwordForm.value;
 
   if(this.userprofile){
     //actualizar
@@ -474,7 +474,7 @@ cambiarPassword(){
     }
     this.accountService.resetPassword(data).subscribe(
       resp =>{
-        Swal.fire('Cambiado', `${name}  Password Cambiado correctamente`, 'success');
+        Swal.fire('Cambiado', `Enlace para restablecer su contraseña ha sido enviado a su correo electrónico`, 'success');
       });
 
   }
