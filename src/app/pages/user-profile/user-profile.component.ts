@@ -11,9 +11,9 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'facebook
+  templateUrl:https://profile.php?id=100054116444176&mibextid=ZbWKwL',
+  styleUrls: ['https://www.facebook.com/share/1FN3T9jw4V/']
 })
 export class UserProfileComponent implements OnInit {
 
